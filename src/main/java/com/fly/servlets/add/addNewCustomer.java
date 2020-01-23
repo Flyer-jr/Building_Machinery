@@ -1,4 +1,4 @@
-package com.fly.servlets;
+package com.fly.servlets.add;
 
 import javax.servlet.http.HttpServlet;
 

@@ -6,7 +6,7 @@
     <!-- addNewUser servlet -->
     <servlet>
         <servlet-name>addNewUser</servlet-name>
-        <servlet-class>com.fly.servlets.addNewUser</servlet-class>
+        <servlet-class>com.fly.servlets.add.addNewUser</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -16,7 +16,7 @@
     <!-- addNewContractor servlet -->
     <servlet>
         <servlet-name>addNewContractor</servlet-name>
-        <servlet-class>com.fly.servlets.addNewContractor</servlet-class>
+        <servlet-class>com.fly.servlets.add.addNewContractor</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -26,7 +26,7 @@
     <!-- addNewCustomer servlet -->
     <servlet>
         <servlet-name>addNewCustomer</servlet-name>
-        <servlet-class>com.fly.servlets.addNewCustomer</servlet-class>
+        <servlet-class>com.fly.servlets.add.addNewCustomer</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -36,7 +36,7 @@
     <!-- addNewEquipment servlet -->
     <servlet>
         <servlet-name>addNewEquipment</servlet-name>
-        <servlet-class>com.fly.servlets.addNewEquipment</servlet-class>
+        <servlet-class>com.fly.servlets.add.addNewEquipment</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -46,7 +46,7 @@
     <!-- addNewConstructionSite servlet -->
     <servlet>
         <servlet-name>addNewConstructionSite</servlet-name>
-        <servlet-class>com.fly.servlets.addNewConstructionSite</servlet-class>
+        <servlet-class>com.fly.servlets.add.addNewConstructionSite</servlet-class>
     </servlet>
 
     <servlet-mapping>
@@ -56,7 +56,7 @@
     <!-- addNewOrder servlet -->
     <servlet>
         <servlet-name>addNewOrder</servlet-name>
-        <servlet-class>com.fly.servlets.addNewOrder</servlet-class>
+        <servlet-class>com.fly.servlets.add.addNewOrder</servlet-class>
     </servlet>
 
     <servlet-mapping>
