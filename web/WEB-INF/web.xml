@@ -3,4 +3,65 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
+    <!-- addNewUser servlet -->
+    <servlet>
+        <servlet-name>addNewUser</servlet-name>
+        <servlet-class>com.fly.servlets.addNewUser</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addNewUser</servlet-name>
+        <url-pattern>/addNewUser</url-pattern>
+    </servlet-mapping>
+    <!-- addNewContractor servlet -->
+    <servlet>
+        <servlet-name>addNewContractor</servlet-name>
+        <servlet-class>com.fly.servlets.addNewContractor</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addNewContractor</servlet-name>
+        <url-pattern>/addNewContractor</url-pattern>
+    </servlet-mapping>
+    <!-- addNewCustomer servlet -->
+    <servlet>
+        <servlet-name>addNewCustomer</servlet-name>
+        <servlet-class>com.fly.servlets.addNewCustomer</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addNewCustomer</servlet-name>
+        <url-pattern>/addNewCustomer</url-pattern>
+    </servlet-mapping>
+    <!-- addNewEquipment servlet -->
+    <servlet>
+        <servlet-name>addNewEquipment</servlet-name>
+        <servlet-class>com.fly.servlets.addNewEquipment</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addNewEquipment</servlet-name>
+        <url-pattern>/addNewEquipment</url-pattern>
+    </servlet-mapping>
+    <!-- addNewConstructionSite servlet -->
+    <servlet>
+        <servlet-name>addNewConstructionSite</servlet-name>
+        <servlet-class>com.fly.servlets.addNewConstructionSite</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addNewConstructionSite</servlet-name>
+        <url-pattern>/addNewConstructionSite</url-pattern>
+    </servlet-mapping>
+    <!-- addNewOrder servlet -->
+    <servlet>
+        <servlet-name>addNewOrder</servlet-name>
+        <servlet-class>com.fly.servlets.addNewOrder</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>addNewOrder</servlet-name>
+        <url-pattern>/addNewOrder</url-pattern>
+    </servlet-mapping>
+
 </web-app>
