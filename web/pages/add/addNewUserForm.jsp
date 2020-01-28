@@ -83,8 +83,8 @@
     </script>
 </head>
 <body>
-<div id="wb_Form1" style="position:absolute;left:324px;top:149px;width:368px;height:276px;z-index:14;">
-    <form name="contact" method="post" action="" enctype="multipart/form-data" id="Form1" onsubmit="return Validatecontact()">
+<div id="wb_Form1" style="position:relative;left:324px;top:149px;width:368px;height:276px;z-index:14;">
+    <form name="addNewUser" method="post" action="" enctype="multipart/form-data" id="Form2" onsubmit="return Validatecontact()">
         <label for="Editbox1" id="Label1" style="position:absolute;left:10px;top:15px;width:120px;height:16px;line-height:16px;z-index:0;">Имя</label>
         <input type="text" id="Editbox1" style="position:absolute;left:148px;top:15px;width:190px;height:16px;z-index:1;" name="name" value="" maxlength="50" spellcheck="false">
         <label for="Editbox2" id="Label2" style="position:absolute;left:10px;top:46px;width:120px;height:16px;line-height:16px;z-index:2;">Фамилия</label>
@@ -96,7 +96,7 @@
         <input type="password" id="Editbox5" style="position:absolute;left:148px;top:139px;width:190px;height:16px;z-index:8;" name="Editbox5" value="" spellcheck="false">
         <label for="Editbox6" id="Label6" style="position:absolute;left:10px;top:170px;width:120px;height:16px;line-height:16px;z-index:9;">Подтвердить пароль</label>
         <input type="password" id="Editbox6" style="position:absolute;left:148px;top:170px;width:190px;height:16px;z-index:10;" name="Editbox6" value="" spellcheck="false">
-        <input type="submit" id="Button2" onclick="document.getElementById('').submit();return false;" name="" value="Send" style="position:absolute;left:148px;top:201px;width:96px;height:25px;z-index:11;">
+        <input type="submit" id="Button2" onclick="location.href='/addNewUser'" name="" value="Send" style="position:absolute;left:148px;top:201px;width:96px;height:25px;z-index:11;">
         <input type="reset" id="Button3" onclick="document.getElementById('').reset();return false;" name="" value="Reset" style="position:absolute;left:148px;top:231px;width:96px;height:25px;z-index:12;">
         <input type="text" id="Editbox3" style="position:absolute;left:148px;top:74px;width:190px;height:16px;z-index:13;" name="Editbox3" value="" maxlength="50" spellcheck="false">
     </form>
