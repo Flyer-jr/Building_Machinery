@@ -1,4 +1,4 @@
-package com.fly.entities;
+package com.fly.repository.entities;
 
 
 import org.apache.commons.lang3.builder.ToStringBuilder;

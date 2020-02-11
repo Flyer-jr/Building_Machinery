@@ -1,4 +1,4 @@
-package com.fly.entities;
+package com.fly.repository.entities;
 
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
@@ -82,7 +82,7 @@ public class User {
 
     @Override
     public String toString () {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 
     @Override
