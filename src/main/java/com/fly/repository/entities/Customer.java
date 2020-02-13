@@ -12,13 +12,6 @@ public class Customer {
     private String managerName;
     private String phoneNumber;
 
-    public Customer ( Long id, String companyName, String adress, String managerName, String phoneNumber ) {
-        this.id = id;
-        this.companyName = companyName;
-        this.adress = adress;
-        this.managerName = managerName;
-        this.phoneNumber = phoneNumber;
-    }
 
     @Override
     public boolean equals ( Object o ) {

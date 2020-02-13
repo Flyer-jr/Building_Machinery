@@ -11,13 +11,6 @@ public class Contractor {
     private String fullName;
     private String adress;
 
-    public Contractor ( Long id, String shortName, String fullName, String adress ) {
-        this.id = id;
-        this.shortName = shortName;
-        this.fullName = fullName;
-        this.adress = adress;
-    }
-
     public Long getId () {
         return id;
     }

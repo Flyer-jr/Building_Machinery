@@ -1,11 +1,12 @@
 package com.fly.repository.impl;
 
-import com.fly.configuration.core.JdbsTemplateConfiguration;
 import com.fly.repository.GenericDAO;
 import com.fly.repository.entities.ConstructionSite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.List;
 
 public class ConstructionSiteDAOimpl implements GenericDAO<ConstructionSite, Long> {
@@ -19,15 +20,25 @@ public class ConstructionSiteDAOimpl implements GenericDAO<ConstructionSite, Lon
     public static final String CONSTRUCTION_SITE_DATE_OF_START="date_of_start";
     public static final String CONSTRUCTION_SITE_DATE_OF_FINISH="date_of_finish";
 
-    private JdbsTemplateConfiguration jdbsTemplateConfiguration;
-
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public ConstructionSiteDAOimpl(JdbsTemplateConfiguration jdbsTemplateConfiguration,
-                                   NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.jdbsTemplateConfiguration = jdbsTemplateConfiguration;
-        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    public ConstructionSiteDAOimpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+           this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+    }
+    private ConstructionSite getSiteRowMapper(ResultSet resultSet, int i) throws SQLException {
+
+        ConstructionSite constructionSite = new ConstructionSite();
+
+        constructionSite.setId(resultSet.getLong(CONSTRUCTION_SITE_ID));
+        constructionSite.setFullName(resultSet.getString(CONSTRUCTION_SITE_FULL_NAME));
+        constructionSite.setShortName(resultSet.getString(CONSTRUCTION_SITE_SHORT_NAME));
+        constructionSite.setCustomerId(resultSet.getLong(CONSTRUCTION_SITE_CUSTOMER_ID));
+        constructionSite.setResponsibleId(resultSet.getLong(CONSTRUCTION_SITE_RESPONSIBLE_ID));
+        constructionSite.setContractorId(resultSet.getLong(CONSTRUCTION_SITE_CONTRACTOR_ID));
+        constructionSite.setDateOfStart(resultSet.getDate(CONSTRUCTION_SITE_DATE_OF_START));
+        constructionSite.setDateOfFinish(resultSet.getDate(CONSTRUCTION_SITE_DATE_OF_FINISH));
+        return constructionSite;
     }
 
     @Override

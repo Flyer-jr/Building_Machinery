@@ -17,17 +17,6 @@ public class ConstructionSite {
     private Date dateOfStart;
     private Date dateOfFinish;
 
-    public ConstructionSite ( Long id, String fullName, String shortName, Long customerId, Long responsibleId, Long contractorId, Date dateOfStart, Date dateOfFinish ) {
-        this.id = id;
-        this.fullName = fullName;
-        this.shortName = shortName;
-        this.customerId = customerId;
-        this.responsibleId = responsibleId;
-        this.contractorId = contractorId;
-        this.dateOfStart = dateOfStart;
-        this.dateOfFinish = dateOfFinish;
-    }
-
     public Long getId () {
         return id;
     }
@@ -114,6 +103,6 @@ public class ConstructionSite {
 
     @Override
     public String toString () {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

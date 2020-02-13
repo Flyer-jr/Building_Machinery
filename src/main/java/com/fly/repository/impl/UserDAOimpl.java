@@ -1,18 +1,15 @@
 package com.fly.repository.impl;
 
-import com.fly.configuration.core.JdbsTemplateConfiguration;
 import com.fly.repository.UserDAO;
 import com.fly.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
-@Repository
 
+@Repository
 public class UserDAOimpl implements UserDAO {
 
     public static final String USER_ID="id";
@@ -24,14 +21,10 @@ public class UserDAOimpl implements UserDAO {
     public static final String USER_ACTUAL="actual";
     public static final String USER_DATE_OF_DISSMISS="date_of_dissmiss";
 
-    private JdbsTemplateConfiguration jdbsTemplateConfiguration;
-
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
-    public UserDAOimpl(JdbsTemplateConfiguration jdbsTemplateConfiguration,
-                       NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-        this.jdbsTemplateConfiguration = jdbsTemplateConfiguration;
+    public UserDAOimpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
