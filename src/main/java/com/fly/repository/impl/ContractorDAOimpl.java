@@ -4,11 +4,13 @@ import com.fly.repository.ContractorDAO;
 import com.fly.repository.entities.Contractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class ContractorDAOimpl implements ContractorDAO {
 
     public static final String CONTRACTOR_ID="id";
@@ -44,7 +46,9 @@ public class ContractorDAOimpl implements ContractorDAO {
 
     @Override
     public List<Contractor> findAll() {
-        return null;
+        final String findAllQuery = "select * from m_contractor";
+        return namedParameterJdbcTemplate.query(findAllQuery, this::getContractorRowMapper);
+
     }
 
     @Override

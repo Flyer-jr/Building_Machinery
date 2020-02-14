@@ -12,13 +12,6 @@ public class Order {
     private Long constructionSiteId;
     private Date dateTaken;
 
-    public Order ( Long id, Long userId, Long constructionSiteId, Date dateTaken ) {
-        this.id = id;
-        this.userId = userId;
-        this.constructionSiteId = constructionSiteId;
-        this.dateTaken = dateTaken;
-    }
-
     public Long getId () {
         return id;
     }
@@ -69,6 +62,6 @@ public class Order {
 
     @Override
     public String toString () {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

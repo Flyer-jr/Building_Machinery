@@ -4,11 +4,13 @@ import com.fly.repository.CustomerDAO;
 import com.fly.repository.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class CustomerDAOimpl implements CustomerDAO {
 
     public static final String CUSTOMER_ID = "id";
@@ -48,7 +50,8 @@ public class CustomerDAOimpl implements CustomerDAO {
 
     @Override
     public List<Customer> findAll() {
-        return null;
+        final String findAllQuery = "select * from m_customers";
+        return namedParameterJdbcTemplate.query(findAllQuery, this::getCustomerRowMapper);
     }
 
     @Override

@@ -60,6 +60,6 @@ public class Contractor {
 
     @Override
     public String toString () {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

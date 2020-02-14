@@ -19,7 +19,7 @@ public class UserDAOimpl implements UserDAO {
     public static final String USER_PASSWORD="password";
     public static final String USER_POST="post";
     public static final String USER_ACTUAL="actual";
-    public static final String USER_DATE_OF_DISSMISS="date_of_dissmiss";
+    public static final String USER_DATE_OF_DISMISS="date_of_dissmiss";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -37,7 +37,7 @@ public class UserDAOimpl implements UserDAO {
         user.setPassword(resultSet.getString(USER_PASSWORD));
         user.setPost(resultSet.getString(USER_POST));
         user.setActual(resultSet.getBoolean(USER_ACTUAL));
-        user.setDateOfDismiss(resultSet.getDate(USER_DATE_OF_DISSMISS));
+        user.setDateOfDismiss(resultSet.getDate(USER_DATE_OF_DISMISS));
         return user;
 
     }

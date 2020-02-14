@@ -12,14 +12,6 @@ public class Equipment {
     private boolean isTaken;
     private Long producerId;
 
-    public Equipment ( Long id, Long storeNumber, String model, boolean isTaken, Long producerId ) {
-        this.id = id;
-        this.storeNumber = storeNumber;
-        this.model = model;
-        this.isTaken = isTaken;
-        this.producerId = producerId;
-    }
-
     public Long getId () {
         return id;
     }
@@ -79,6 +71,6 @@ public class Equipment {
 
     @Override
     public String toString () {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.JSON_STYLE);
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

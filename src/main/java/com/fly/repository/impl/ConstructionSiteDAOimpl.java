@@ -1,15 +1,18 @@
 package com.fly.repository.impl;
 
+import com.fly.repository.ConstructionSiteDAO;
 import com.fly.repository.GenericDAO;
 import com.fly.repository.entities.ConstructionSite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-public class ConstructionSiteDAOimpl implements GenericDAO<ConstructionSite, Long> {
+@Repository
+public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
 
     public static final String CONSTRUCTION_SITE_ID="id";
     public static final String CONSTRUCTION_SITE_FULL_NAME="full_name";
@@ -43,7 +46,9 @@ public class ConstructionSiteDAOimpl implements GenericDAO<ConstructionSite, Lon
 
     @Override
     public List<ConstructionSite> findAll() {
-        return null;
+        final String findAllQuery = "select * from m_construction_site";
+        return namedParameterJdbcTemplate.query(findAllQuery, this::getSiteRowMapper);
+
     }
 
     @Override
@@ -63,6 +68,11 @@ public class ConstructionSiteDAOimpl implements GenericDAO<ConstructionSite, Lon
 
     @Override
     public ConstructionSite update(ConstructionSite entity) {
+        return null;
+    }
+
+    @Override
+    public ConstructionSite findByShortName(String shortName) {
         return null;
     }
 }
