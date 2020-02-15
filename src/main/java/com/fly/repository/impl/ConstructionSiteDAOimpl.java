@@ -1,7 +1,6 @@
 package com.fly.repository.impl;
 
-import com.fly.repository.ConstructionSiteDAO;
-import com.fly.repository.GenericDAO;
+import com.fly.repository.dao.ConstructionSiteDAO;
 import com.fly.repository.entities.ConstructionSite;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

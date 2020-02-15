@@ -1,4 +1,4 @@
-package com.fly.repository;
+package com.fly.repository.dao;
 
 import java.util.List;
 

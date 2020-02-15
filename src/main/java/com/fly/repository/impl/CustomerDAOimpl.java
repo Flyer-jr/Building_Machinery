@@ -1,6 +1,6 @@
 package com.fly.repository.impl;
 
-import com.fly.repository.CustomerDAO;
+import com.fly.repository.dao.CustomerDAO;
 import com.fly.repository.entities.Customer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

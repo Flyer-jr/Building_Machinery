@@ -104,4 +104,6 @@ public class User {
     public int hashCode () {
         return Objects.hash(id, firstName, secondName, phoneNumber, password, post, isActual, dateOfDismiss);
     }
+
+
 }

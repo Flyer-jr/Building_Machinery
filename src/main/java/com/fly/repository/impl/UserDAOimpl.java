@@ -1,13 +1,20 @@
 package com.fly.repository.impl;
 
-import com.fly.repository.UserDAO;
+import com.fly.repository.dao.UserDAO;
 import com.fly.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+
+import javax.swing.*;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class UserDAOimpl implements UserDAO {
@@ -50,31 +57,75 @@ public class UserDAOimpl implements UserDAO {
 
     @Override
     public User findById(Long id) {
-        return null;
+        final String findByID = "select * from m_user where id = :userId";
+
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("userId", id);
+
+        return namedParameterJdbcTemplate.queryForObject(findByID, parameterSource, this::getUserRowMapper);
     }
 
     @Override
     public void delete(Long id) {
+        final String delete = "delete from m_user where id = :userId";
+
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("userId", id);
+
+        namedParameterJdbcTemplate.update(delete,parameterSource);
 
     }
 
     @Override
     public User save(User entity) {
-        return null;
+        final String createQuery = "INSERT INTO m_user (first_name, second_name, phone_number, password, post, actual, date_of_dissmiss)" +
+                "VALUES (:userFirstName, :userSecondName, :userPhoneNumber, :userPassword, :userPost, :userActual, :userDateOfDismiss)";
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource();
+        sqlParameterSource.addValue("userFirstName", entity.getFirstName());
+        sqlParameterSource.addValue("userSecondName", entity.getSecondName());
+        sqlParameterSource.addValue("userPhoneNumber", entity.getPhoneNumber());
+        sqlParameterSource.addValue("userPassword", entity.getPassword());
+        sqlParameterSource.addValue("userPost", entity.getPost());
+        sqlParameterSource.addValue("userActual", entity.isActual());
+        sqlParameterSource.addValue("userDateOfDismiss", entity.getDateOfDismiss());
+
+        namedParameterJdbcTemplate.update(createQuery, sqlParameterSource, keyHolder);
+
+        long createdUserId = Objects.requireNonNull(keyHolder.getKey().longValue());
+
+        return findById(createdUserId);
     }
 
     @Override
     public User update(User entity) {
-        return null;
+        final String updateQuery = "UPDATE m_user set first_name = :userName, second_name = :userSecondName," +
+                "phone_number = :userPhoneNumber, password = :userPassword, post = :userPost," +
+                "actual = :userActual, date_of_dissmiss = :useDateOfDismiss where id = :userId";
+
+        MapSqlParameterSource sqlParameterSource = new MapSqlParameterSource();
+        sqlParameterSource.addValue("userId", entity.getId());
+        sqlParameterSource.addValue("userFirstName", entity.getFirstName());
+        sqlParameterSource.addValue("userSecondName", entity.getSecondName());
+        sqlParameterSource.addValue("userPhoneNumber", entity.getPhoneNumber());
+        sqlParameterSource.addValue("userPassword", entity.getPassword());
+        sqlParameterSource.addValue("userPost", entity.getPost());
+        sqlParameterSource.addValue("userActual", entity.isActual());
+        sqlParameterSource.addValue("userDateOfDismiss", entity.getDateOfDismiss());
+
+        namedParameterJdbcTemplate.update(updateQuery, sqlParameterSource);
+        return findById(entity.getId());
     }
 
     @Override
-    public List<Long> batchUpdate(List<User> users) {
-        return null;
-    }
-
-    @Override
-    public void dissmiss(Long id) {
+    public void dissmiss(Long id, Date date) {
+        User user = new User();
+        user = findById(id);
+        user.setDateOfDismiss(date);
+        user.setActual(Boolean.FALSE);
+        user = update(findById(id));
 
     }
 }

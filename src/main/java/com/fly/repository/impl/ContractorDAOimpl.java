@@ -1,6 +1,6 @@
 package com.fly.repository.impl;
 
-import com.fly.repository.ContractorDAO;
+import com.fly.repository.dao.ContractorDAO;
 import com.fly.repository.entities.Contractor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;

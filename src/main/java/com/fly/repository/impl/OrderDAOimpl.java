@@ -1,15 +1,19 @@
 package com.fly.repository.impl;
 
-import com.fly.repository.OrderDAO;
+import com.fly.repository.dao.OrderDAO;
 import com.fly.repository.entities.Order;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class OrderDAOimpl implements OrderDAO {
@@ -56,21 +60,54 @@ public class OrderDAOimpl implements OrderDAO {
 
     @Override
     public Order findById(Long id) {
-        return null;
+
+        final String findById = "select * from m_order where id = :orderId";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("orderId", id);
+
+        return namedParameterJdbcTemplate.queryForObject(findById,parameterSource, this::getOrderRowMapper);
     }
 
     @Override
     public void delete(Long id) {
 
+        final String deleteQuery = "DELETE from m_order where id = :orderId";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("orderId", id);
+        namedParameterJdbcTemplate.update(deleteQuery,parameterSource);
+
     }
 
     @Override
     public Order save(Order entity) {
-        return null;
+
+        final String saveQuery = "INSERT INTO m_order (user_id, consruction_site_id, date_taken)" +
+                "VALUES (:userId, :constructionSiteId, :dateTaken)";
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("userId", entity.getUserId());
+        parameterSource.addValue("constructionSiteId", entity.getConstructionSiteId());
+        parameterSource.addValue("dateTaken", entity.getDateTaken());
+
+        namedParameterJdbcTemplate.update(saveQuery,parameterSource,keyHolder);
+
+        long createdOrderId = Objects.requireNonNull(keyHolder.getKey().longValue());
+
+        return findById(createdOrderId);
     }
 
     @Override
     public Order update(Order entity) {
-        return null;
+
+        final String updateQuery = "UPDATE m_order set user_id = :userID, construction_site_id = :constructionSiteId," +
+                " date_taken = dateTaken where id = :Id";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("userId", entity.getUserId());
+        parameterSource.addValue("constructionSiteId", entity.getConstructionSiteId());
+        parameterSource.addValue("dateTaken", entity.getDateTaken());
+        parameterSource.addValue("id", entity.getId());
+
+        namedParameterJdbcTemplate.update(updateQuery, parameterSource);
+        return findById(entity.getId());
     }
 }

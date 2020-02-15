@@ -1,12 +1,10 @@
 package com.fly;
 
 import com.fly.configuration.core.AppConfig;
-import com.fly.repository.*;
+import com.fly.repository.dao.*;
 import com.fly.repository.entities.*;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-
-import javax.security.auth.login.AppConfigurationEntry;
 
 public class Main {
     public static void main(String[] args) {
