@@ -3,12 +3,17 @@ package com.fly.repository.impl;
 import com.fly.repository.dao.ConstructionSiteDAO;
 import com.fly.repository.entities.ConstructionSite;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
+import javax.swing.*;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 
 @Repository
 public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
@@ -52,26 +57,71 @@ public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
 
     @Override
     public ConstructionSite findById(Long id) {
-        return null;
+
+        final String findByIdQuery = "SELECT * FROM m_construction_site WHERE id = :siteId";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("siteId", id);
+
+        return namedParameterJdbcTemplate.queryForObject(findByIdQuery, parameterSource, this::getSiteRowMapper);
     }
 
     @Override
     public void delete(Long id) {
 
+        final String deleteQuery = "DELETE FROM m_construction_site WHERE id = :siteId";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("siteId", id);
+        namedParameterJdbcTemplate.update(deleteQuery,parameterSource);
+
     }
 
     @Override
     public ConstructionSite save(ConstructionSite entity) {
-        return null;
+
+        final String saveSiteQuery = "INSERT INTO m_construction_site (full_name, short_name, customer_id, responsible_id, contractor_id, date_of_start, date_of_finish) " +
+                "VALUES (:fuulName, :shortName, :customerId, :responsibleId, :contractorId, :dateOfStart, :dateOfFinish)";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("fullName", entity.getFullName());
+        parameterSource.addValue("shortName", entity.getShortName());
+        parameterSource.addValue("customerId", entity.getCustomerId());
+        parameterSource.addValue("responsibleId", entity.getResponsibleId());
+        parameterSource.addValue("contractorId", entity.getContractorId());
+        parameterSource.addValue("dateOfStart", entity.getDateOfStart());
+        parameterSource.addValue("dateOfFinish", entity.getDateOfFinish());
+
+        KeyHolder keyHolder = new GeneratedKeyHolder();
+        namedParameterJdbcTemplate.update(saveSiteQuery,parameterSource,keyHolder);
+        Long generatedNewSiteId = Objects.requireNonNull(keyHolder.getKey().longValue());
+        return findById(generatedNewSiteId);
     }
 
     @Override
     public ConstructionSite update(ConstructionSite entity) {
-        return null;
+
+        final String updateQuery = "UPDATE m_construction_site SET full_name = :fullName, short_name = :shortName" +
+                "customer_id = :customerId, responsible_id = :responsibleId, contractor_id = :contractorId, " +
+                "date_of_start = :dateOfStart, date_of_finish = :dateOfFinish WHERE id = :siteId";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("fullName", entity.getFullName());
+        parameterSource.addValue("shortName", entity.getShortName());
+        parameterSource.addValue("customerId", entity.getCustomerId());
+        parameterSource.addValue("responsibleId", entity.getResponsibleId());
+        parameterSource.addValue("contractorId", entity.getContractorId());
+        parameterSource.addValue("dateOfStart", entity.getDateOfStart());
+        parameterSource.addValue("dateOfFinish", entity.getDateOfFinish());
+        parameterSource.addValue("siteId", entity.getId());
+        namedParameterJdbcTemplate.update(updateQuery,parameterSource);
+        return findById(entity.getId());
     }
 
     @Override
     public ConstructionSite findByShortName(String shortName) {
-        return null;
+
+        final String findByShortNameQuery = "SELECT * FROM m_construction_site WHERE " +
+                "lower(short_name) LIKE lower(:shortName)";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("shortName", shortName);
+
+        return namedParameterJdbcTemplate.queryForObject(findByShortNameQuery,parameterSource, this::getSiteRowMapper);
     }
 }
