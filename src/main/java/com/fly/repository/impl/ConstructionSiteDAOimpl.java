@@ -115,7 +115,7 @@ public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
     }
 
     @Override
-    public ConstructionSite findByShortName(String shortName) {
+    public ConstructionSite findSiteByShortName(String shortName) {
 
         final String findByShortNameQuery = "SELECT * FROM m_construction_site WHERE " +
                 "lower(short_name) LIKE lower(:shortName)";

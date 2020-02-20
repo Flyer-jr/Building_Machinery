@@ -6,9 +6,9 @@ import java.sql.Date;
 import java.util.List;
 
 public interface OrderDAO extends GenericDAO<Order, Long> {
-    List<Order> findByDate(Date date);
+    List<Order> findOrderByDate(Date date);
 
-    List<Order> findByUser(Long userId);
+    List<Order> findOrderByUser(Long userId);
 
 
 }

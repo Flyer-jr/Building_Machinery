@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface UserDAO extends GenericDAO<User, Long> {
 
-    void dissmiss(Long id, Date date);
+    void dissmissUser(Long id, Date date);
 }

@@ -43,7 +43,7 @@ public class CustomerDAOimpl implements CustomerDAO {
     }
 
     @Override
-    public List<Customer> findByManager(String query) {
+    public List<Customer> findCustomerByManager(String query) {
 
         final String findByManagerQuery = "SELECT * FROM m_customers WHERE lower(manager) LIKE lower(query)";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
@@ -53,7 +53,7 @@ public class CustomerDAOimpl implements CustomerDAO {
     }
 
     @Override
-    public Customer findByCompanyName(String companyName) {
+    public Customer findCustomerByCompanyName(String companyName) {
 
         final String findByCompanyNameQuery = "SELECT * FROM m_customers WHERE" +
                 "lower(company_name) LIKE lower(companyName)";

@@ -43,13 +43,23 @@ public class OrderDAOimpl implements OrderDAO {
     }
 
     @Override
-    public List<Order> findByDate(Date date) {
-        return null;
+    public List<Order> findOrderByDate(Date date) {
+
+        final String findByDate = "select * from m_order where date_taken = :dateTaken";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("dateTaken", date);
+
+        return namedParameterJdbcTemplate.query(findByDate, parameterSource, this::getOrderRowMapper);
     }
 
     @Override
-    public List<Order> findByUser(Long userId) {
-        return null;
+    public List<Order> findOrderByUser(Long userId) {
+
+        final String findByUser = "select * from m_order where user_id = :userId";
+        MapSqlParameterSource parameterSource = new MapSqlParameterSource();
+        parameterSource.addValue("userId", userId);
+
+        return namedParameterJdbcTemplate.query(findByUser, parameterSource, this::getOrderRowMapper);
     }
 
     @Override

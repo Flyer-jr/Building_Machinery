@@ -2,6 +2,7 @@ package com.fly.repository.impl;
 
 import com.fly.repository.dao.UserDAO;
 import com.fly.repository.entities.User;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -120,7 +121,7 @@ public class UserDAOimpl implements UserDAO {
     }
 
     @Override
-    public void dissmiss(Long id, Date date) {
+    public void dissmissUser(Long id, Date date) {
         User user = new User();
         user = findById(id);
         user.setDateOfDismiss(date);

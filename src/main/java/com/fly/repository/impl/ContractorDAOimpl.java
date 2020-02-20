@@ -44,7 +44,7 @@ public class ContractorDAOimpl implements ContractorDAO {
     }
 
     @Override
-    public Contractor findByShortName(String shortName) {
+    public Contractor findContractorByShortName(String shortName) {
         return null;
     }
 

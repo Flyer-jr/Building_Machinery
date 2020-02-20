@@ -44,7 +44,7 @@ public class EquipmentDAOimpl implements EquipmentDAO {
     }
 
     @Override
-    public Equipment findByStoreNumber(Long storeNumber) {
+    public Equipment findEquipmentByStoreNumber(Long storeNumber) {
         final String findByNumber = "select * from m_equipment where store_number = :storeNumber";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("storeNumber", storeNumber);
