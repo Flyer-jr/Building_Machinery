@@ -8,4 +8,5 @@ import org.springframework.context.annotation.Import;
 @ComponentScan("com.fly")
 @Import({DataBaseConfiguration.class, JdbsTemplateConfiguration.class})
 public class AppConfig {
+
 }

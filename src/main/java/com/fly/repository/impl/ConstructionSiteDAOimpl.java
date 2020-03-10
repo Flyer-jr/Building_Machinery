@@ -9,7 +9,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.*;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
