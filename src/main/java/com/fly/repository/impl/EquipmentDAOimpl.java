@@ -2,6 +2,7 @@ package com.fly.repository.impl;
 
 import com.fly.repository.dao.EquipmentDAO;
 import com.fly.repository.entities.Equipment;
+import com.fly.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -23,7 +24,7 @@ public class EquipmentDAOimpl implements EquipmentDAO {
     public static String EQUIPMENT_IS_TAKEN = "is_taken";
     public static String EQUIPMENT_PRODUCER_ID = "producer_id";
 
-    private Equipment getEquipmentRowMapper (ResultSet resultSet, int i) throws SQLException {
+    private Equipment getEquipmentRowMapper(ResultSet resultSet, int i) throws SQLException {
 
         Equipment equipment = new Equipment();
 
@@ -36,6 +37,7 @@ public class EquipmentDAOimpl implements EquipmentDAO {
         return equipment;
 
     }
+
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
@@ -49,7 +51,7 @@ public class EquipmentDAOimpl implements EquipmentDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("storeNumber", storeNumber);
 
-        return namedParameterJdbcTemplate.queryForObject(findByNumber,parameterSource, this::getEquipmentRowMapper);
+        return namedParameterJdbcTemplate.queryForObject(findByNumber, parameterSource, this::getEquipmentRowMapper);
     }
 
     @Override
@@ -65,7 +67,7 @@ public class EquipmentDAOimpl implements EquipmentDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("equipmentId", id);
 
-        return namedParameterJdbcTemplate.queryForObject(findById,parameterSource, this::getEquipmentRowMapper);
+        return namedParameterJdbcTemplate.queryForObject(findById, parameterSource, this::getEquipmentRowMapper);
     }
 
     @Override
@@ -74,7 +76,7 @@ public class EquipmentDAOimpl implements EquipmentDAO {
         final String deleteQuery = "DELETE from m_equipment where id = :equipmentId";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("equipmentId", id);
-        namedParameterJdbcTemplate.update(deleteQuery,parameterSource);
+        namedParameterJdbcTemplate.update(deleteQuery, parameterSource);
 
     }
 
@@ -90,7 +92,7 @@ public class EquipmentDAOimpl implements EquipmentDAO {
         parameterSource.addValue("isTaken", entity.isTaken());
         parameterSource.addValue("producerId", entity.getProducerId());
 
-        namedParameterJdbcTemplate.update(saveQuery,parameterSource,keyHolder);
+        namedParameterJdbcTemplate.update(saveQuery, parameterSource, keyHolder);
 
         long createdEquipmentId = Objects.requireNonNull(keyHolder.getKey().longValue());
 

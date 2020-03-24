@@ -2,7 +2,6 @@ package com.fly.repository.impl;
 
 import com.fly.repository.dao.UserDAO;
 import com.fly.repository.entities.User;
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -10,26 +9,27 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.*;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
+
 @Repository
 public class UserDAOimpl implements UserDAO {
 
-    public static final String USER_ID="id";
-    public static final String USER_FIRST_NAME="first_name";
-    public static final String USER_SECOND_NAME="second_name";
-    public static final String USER_PHONE_NUMBER="phone_number";
-    public static final String USER_PASSWORD="password";
-    public static final String USER_POST="post";
-    public static final String USER_ACTUAL="actual";
-    public static final String USER_DATE_OF_DISMISS="date_of_dissmiss";
+    public static final String USER_ID = "id";
+    public static final String USER_FIRST_NAME = "first_name";
+    public static final String USER_SECOND_NAME = "second_name";
+    public static final String USER_PHONE_NUMBER = "phone_number";
+    public static final String USER_PASSWORD = "password";
+    public static final String USER_POST = "post";
+    public static final String USER_ACTUAL = "actual";
+    public static final String USER_DATE_OF_DISMISS = "date_of_dissmiss";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
+
 
     @Autowired
     public UserDAOimpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
@@ -54,6 +54,7 @@ public class UserDAOimpl implements UserDAO {
     public List<User> findAll() {
         final String findAllQuery = "select * from m_user";
         return namedParameterJdbcTemplate.query(findAllQuery, this::getUserRowMapper);
+
     }
 
     @Override
@@ -73,7 +74,7 @@ public class UserDAOimpl implements UserDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("userId", id);
 
-        namedParameterJdbcTemplate.update(delete,parameterSource);
+        namedParameterJdbcTemplate.update(delete, parameterSource);
 
     }
 

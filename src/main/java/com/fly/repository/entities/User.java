@@ -4,6 +4,7 @@ import lombok.*;
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 
+
 import java.sql.Date;
 import java.util.Objects;
 
@@ -14,15 +15,17 @@ import java.util.Objects;
 @Setter
 @Builder
 @EqualsAndHashCode
+
 public class User {
-        private Long id;
-        private String firstName;
-        private String secondName;
-        private String phoneNumber;
-        private String password;
-        private String post;
-        private boolean isActual;
-        private Date dateOfDismiss;
+
+    private Long id;
+    private String firstName;
+    private String secondName;
+    private String phoneNumber;
+    private String password;
+    private String post;
+    private boolean isActual;
+    private Date dateOfDismiss;
 
     @Override
     public String toString () {

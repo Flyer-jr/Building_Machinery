@@ -26,7 +26,7 @@ public class ConstructionSite {
     private Date dateOfFinish;
 
     @Override
-    public String toString () {
+    public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

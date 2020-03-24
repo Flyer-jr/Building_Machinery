@@ -2,6 +2,7 @@ package com.fly.repository.impl;
 
 import com.fly.repository.dao.ConstructionSiteDAO;
 import com.fly.repository.entities.ConstructionSite;
+import com.fly.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -18,21 +19,22 @@ import java.util.Objects;
 @Repository
 public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
 
-    public static final String CONSTRUCTION_SITE_ID="id";
-    public static final String CONSTRUCTION_SITE_FULL_NAME="full_name";
-    public static final String CONSTRUCTION_SITE_SHORT_NAME="short_name";
-    public static final String CONSTRUCTION_SITE_CUSTOMER_ID="customer_id";
-    public static final String CONSTRUCTION_SITE_RESPONSIBLE_ID="responsible_id";
-    public static final String CONSTRUCTION_SITE_CONTRACTOR_ID="contractor_id";
-    public static final String CONSTRUCTION_SITE_DATE_OF_START="date_of_start";
-    public static final String CONSTRUCTION_SITE_DATE_OF_FINISH="date_of_finish";
+    public static final String CONSTRUCTION_SITE_ID = "id";
+    public static final String CONSTRUCTION_SITE_FULL_NAME = "full_name";
+    public static final String CONSTRUCTION_SITE_SHORT_NAME = "short_name";
+    public static final String CONSTRUCTION_SITE_CUSTOMER_ID = "customer_id";
+    public static final String CONSTRUCTION_SITE_RESPONSIBLE_ID = "responsible_id";
+    public static final String CONSTRUCTION_SITE_CONTRACTOR_ID = "contractor_id";
+    public static final String CONSTRUCTION_SITE_DATE_OF_START = "date_of_start";
+    public static final String CONSTRUCTION_SITE_DATE_OF_FINISH = "date_of_finish";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
     @Autowired
     public ConstructionSiteDAOimpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
-           this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
+        this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
+
     private ConstructionSite getSiteRowMapper(ResultSet resultSet, int i) throws SQLException {
 
         ConstructionSite constructionSite = new ConstructionSite();
@@ -71,7 +73,7 @@ public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
         final String deleteQuery = "DELETE FROM m_construction_site WHERE id = :siteId";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("siteId", id);
-        namedParameterJdbcTemplate.update(deleteQuery,parameterSource);
+        namedParameterJdbcTemplate.update(deleteQuery, parameterSource);
 
     }
 
@@ -90,7 +92,7 @@ public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
         parameterSource.addValue("dateOfFinish", entity.getDateOfFinish());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(saveSiteQuery,parameterSource,keyHolder);
+        namedParameterJdbcTemplate.update(saveSiteQuery, parameterSource, keyHolder);
         Long generatedNewSiteId = Objects.requireNonNull(keyHolder.getKey().longValue());
         return findById(generatedNewSiteId);
     }
@@ -110,7 +112,7 @@ public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
         parameterSource.addValue("dateOfStart", entity.getDateOfStart());
         parameterSource.addValue("dateOfFinish", entity.getDateOfFinish());
         parameterSource.addValue("siteId", entity.getId());
-        namedParameterJdbcTemplate.update(updateQuery,parameterSource);
+        namedParameterJdbcTemplate.update(updateQuery, parameterSource);
         return findById(entity.getId());
     }
 
@@ -122,6 +124,6 @@ public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("shortName", shortName);
 
-        return namedParameterJdbcTemplate.queryForObject(findByShortNameQuery,parameterSource, this::getSiteRowMapper);
+        return namedParameterJdbcTemplate.queryForObject(findByShortNameQuery, parameterSource, this::getSiteRowMapper);
     }
 }

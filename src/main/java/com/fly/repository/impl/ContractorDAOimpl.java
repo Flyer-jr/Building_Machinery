@@ -2,6 +2,7 @@ package com.fly.repository.impl;
 
 import com.fly.repository.dao.ContractorDAO;
 import com.fly.repository.entities.Contractor;
+import com.fly.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -17,10 +18,10 @@ import java.util.Objects;
 @Repository
 public class ContractorDAOimpl implements ContractorDAO {
 
-    public static final String CONTRACTOR_ID="id";
-    public static final String CONTRACTOR_SHORT_NAME="short_name";
-    public static final String CONTRACTOR_FULL_NAME="full_name";
-    public static final String CONTRACTOR_ADRESS="adress";
+    public static final String CONTRACTOR_ID = "id";
+    public static final String CONTRACTOR_SHORT_NAME = "short_name";
+    public static final String CONTRACTOR_FULL_NAME = "full_name";
+    public static final String CONTRACTOR_ADRESS = "adress";
 
     private NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
@@ -61,7 +62,7 @@ public class ContractorDAOimpl implements ContractorDAO {
         final String findQuery = "select * from m_contractor where id = :contractorId";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("contractorId", id);
-        return namedParameterJdbcTemplate.queryForObject(findQuery,parameterSource, this::getContractorRowMapper);
+        return namedParameterJdbcTemplate.queryForObject(findQuery, parameterSource, this::getContractorRowMapper);
     }
 
     @Override
@@ -69,7 +70,7 @@ public class ContractorDAOimpl implements ContractorDAO {
         final String deleteQuery = "DELETE * from m_contractor where id = :contractorId";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("contractorId", id);
-        namedParameterJdbcTemplate.update(deleteQuery,parameterSource);
+        namedParameterJdbcTemplate.update(deleteQuery, parameterSource);
 
     }
 
@@ -85,7 +86,7 @@ public class ContractorDAOimpl implements ContractorDAO {
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
 
-        namedParameterJdbcTemplate.update(saveQuery, parameterSource,keyHolder);
+        namedParameterJdbcTemplate.update(saveQuery, parameterSource, keyHolder);
 
         Long createdContactorId = Objects.requireNonNull(keyHolder.getKey().longValue());
 
@@ -101,9 +102,9 @@ public class ContractorDAOimpl implements ContractorDAO {
         parameterSource.addValue("shortName", entity.getShortName());
         parameterSource.addValue("fullName", entity.getFullName());
         parameterSource.addValue("adress", entity.getAdress());
-        parameterSource.addValue("contractorId",entity.getId());
+        parameterSource.addValue("contractorId", entity.getId());
 
-        namedParameterJdbcTemplate.update(updateQuery,parameterSource);
+        namedParameterJdbcTemplate.update(updateQuery, parameterSource);
         return findById(entity.getId());
     }
 }

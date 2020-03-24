@@ -2,6 +2,7 @@ package com.fly.repository.impl;
 
 import com.fly.repository.dao.CustomerDAO;
 import com.fly.repository.entities.Customer;
+import com.fly.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -29,16 +30,17 @@ public class CustomerDAOimpl implements CustomerDAO {
     public CustomerDAOimpl(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
-    private Customer getCustomerRowMapper (ResultSet resultSet, int i) throws SQLException {
+
+    private Customer getCustomerRowMapper(ResultSet resultSet, int i) throws SQLException {
 
         Customer customer = new Customer();
 
-       customer.setId(resultSet.getLong(CUSTOMER_ID));
-       customer.setCompanyName(resultSet.getString(CUSTOMER_COMPANY_NAME));
-       customer.setAdress(resultSet.getString(CUSTOMER_ADRESS));
-       customer.setManagerName(resultSet.getString(CUSTOMER_MANAGER));
-       customer.setPhoneNumber(resultSet.getString(CUSTOMER_PHONE_NUMBER));
-       return  customer;
+        customer.setId(resultSet.getLong(CUSTOMER_ID));
+        customer.setCompanyName(resultSet.getString(CUSTOMER_COMPANY_NAME));
+        customer.setAdress(resultSet.getString(CUSTOMER_ADRESS));
+        customer.setManagerName(resultSet.getString(CUSTOMER_MANAGER));
+        customer.setPhoneNumber(resultSet.getString(CUSTOMER_PHONE_NUMBER));
+        return customer;
 
     }
 
@@ -49,7 +51,7 @@ public class CustomerDAOimpl implements CustomerDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("query", "%" + query + "%");
 
-        return namedParameterJdbcTemplate.query(findByManagerQuery,parameterSource,this::getCustomerRowMapper);
+        return namedParameterJdbcTemplate.query(findByManagerQuery, parameterSource, this::getCustomerRowMapper);
     }
 
     @Override
@@ -58,8 +60,8 @@ public class CustomerDAOimpl implements CustomerDAO {
         final String findByCompanyNameQuery = "SELECT * FROM m_customers WHERE" +
                 "lower(company_name) LIKE lower(companyName)";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
-        parameterSource.addValue("companeName", "%" + companyName + "%" );
-        return namedParameterJdbcTemplate.queryForObject(findByCompanyNameQuery,parameterSource, this::getCustomerRowMapper);
+        parameterSource.addValue("companeName", "%" + companyName + "%");
+        return namedParameterJdbcTemplate.queryForObject(findByCompanyNameQuery, parameterSource, this::getCustomerRowMapper);
     }
 
     @Override
@@ -75,7 +77,7 @@ public class CustomerDAOimpl implements CustomerDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("customerId", id);
 
-        return namedParameterJdbcTemplate.queryForObject(findByIdQuery,parameterSource, this::getCustomerRowMapper);
+        return namedParameterJdbcTemplate.queryForObject(findByIdQuery, parameterSource, this::getCustomerRowMapper);
     }
 
     @Override
@@ -84,9 +86,9 @@ public class CustomerDAOimpl implements CustomerDAO {
         final String deleteQuery = "DELETE * FROM m_cutomers WHERE id = :customerId";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("customerId", id);
-        namedParameterJdbcTemplate.update(deleteQuery,parameterSource);
+        namedParameterJdbcTemplate.update(deleteQuery, parameterSource);
 
-        }
+    }
 
     @Override
     public Customer save(Customer entity) {
@@ -100,7 +102,7 @@ public class CustomerDAOimpl implements CustomerDAO {
         parameterSource.addValue("phoneNumber", entity.getPhoneNumber());
 
         KeyHolder keyHolder = new GeneratedKeyHolder();
-        namedParameterJdbcTemplate.update(updateQuery,parameterSource,keyHolder);
+        namedParameterJdbcTemplate.update(updateQuery, parameterSource, keyHolder);
         Long newGeneratedCustomerId = Objects.requireNonNull(keyHolder.getKey().longValue());
 
         return findById(newGeneratedCustomerId);
@@ -117,7 +119,7 @@ public class CustomerDAOimpl implements CustomerDAO {
         parameterSource.addValue("manager", entity.getManagerName());
         parameterSource.addValue("phoneNumber", entity.getPhoneNumber());
         parameterSource.addValue("customerId", entity.getId());
-        namedParameterJdbcTemplate.update(updateQuery,parameterSource);
+        namedParameterJdbcTemplate.update(updateQuery, parameterSource);
 
         return findById(entity.getId());
     }

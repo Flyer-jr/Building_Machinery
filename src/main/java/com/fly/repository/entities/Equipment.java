@@ -21,7 +21,7 @@ public class Equipment {
     private Long producerId;
 
     @Override
-    public String toString () {
+    public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
     }
 }

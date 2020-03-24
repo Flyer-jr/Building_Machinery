@@ -1,5 +1,7 @@
 package com.fly.repository.dao;
 
+import com.fly.repository.entities.User;
+
 import java.util.List;
 
 public interface GenericDAO<T, K> {
@@ -14,4 +16,4 @@ public interface GenericDAO<T, K> {
     T update(T entity);
 
 
-   }
+}

@@ -2,6 +2,7 @@ package com.fly.repository.impl;
 
 import com.fly.repository.dao.OrderDAO;
 import com.fly.repository.entities.Order;
+import com.fly.repository.entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -30,7 +31,7 @@ public class OrderDAOimpl implements OrderDAO {
         this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
     }
 
-    private Order getOrderRowMapper (ResultSet resultSet, int i) throws SQLException {
+    private Order getOrderRowMapper(ResultSet resultSet, int i) throws SQLException {
 
         Order order = new Order();
 
@@ -75,7 +76,7 @@ public class OrderDAOimpl implements OrderDAO {
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("orderId", id);
 
-        return namedParameterJdbcTemplate.queryForObject(findById,parameterSource, this::getOrderRowMapper);
+        return namedParameterJdbcTemplate.queryForObject(findById, parameterSource, this::getOrderRowMapper);
     }
 
     @Override
@@ -84,7 +85,7 @@ public class OrderDAOimpl implements OrderDAO {
         final String deleteQuery = "DELETE from m_order where id = :orderId";
         MapSqlParameterSource parameterSource = new MapSqlParameterSource();
         parameterSource.addValue("orderId", id);
-        namedParameterJdbcTemplate.update(deleteQuery,parameterSource);
+        namedParameterJdbcTemplate.update(deleteQuery, parameterSource);
 
     }
 
@@ -99,7 +100,7 @@ public class OrderDAOimpl implements OrderDAO {
         parameterSource.addValue("constructionSiteId", entity.getConstructionSiteId());
         parameterSource.addValue("dateTaken", entity.getDateTaken());
 
-        namedParameterJdbcTemplate.update(saveQuery,parameterSource,keyHolder);
+        namedParameterJdbcTemplate.update(saveQuery, parameterSource, keyHolder);
 
         long createdOrderId = Objects.requireNonNull(keyHolder.getKey().longValue());
 
