@@ -1,11 +1,15 @@
 package com.fly.repository.hibernate;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
 
 @RequiredArgsConstructor
+@Getter
+@Setter
 @Entity
 @Table(name = "m_construction_site")
 public class HibernateConstructionSite {
