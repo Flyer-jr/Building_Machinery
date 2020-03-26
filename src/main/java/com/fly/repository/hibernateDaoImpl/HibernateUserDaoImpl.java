@@ -21,14 +21,14 @@ public class HibernateUserDaoImpl implements HibernateUserDAO {
 
     @Override
     public List<HibernateUser> findAll() {
-        System.out.println(entityManager.toString());
+
         return entityManager.createQuery("select hu from HibernateUser hu", HibernateUser.class).getResultList();
 
     }
 
     @Override
     public HibernateUser findById(Long id) {
-        return null;
+        return entityManager.find(HibernateUser.class, id);
     }
 
     @Override

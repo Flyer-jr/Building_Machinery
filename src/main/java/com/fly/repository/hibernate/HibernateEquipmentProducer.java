@@ -7,8 +7,6 @@ import javax.persistence.*;
 @RequiredArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode
-@ToString
 @Entity
 @Table(name = "m_equipment_producers")
 public class HibernateEquipmentProducer {

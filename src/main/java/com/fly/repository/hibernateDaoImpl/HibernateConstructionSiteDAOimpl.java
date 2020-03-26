@@ -6,8 +6,10 @@ import com.fly.repository.hibernateDAO.HibernateConstructionSiteDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
 import java.util.List;
 
 @Repository
@@ -21,28 +23,40 @@ public class HibernateConstructionSiteDAOimpl implements HibernateConstructionSi
 
     @Override
     public List<HibernateConstructionSite> findAll() {
-        System.out.println(entityManager.toString());
+
         return entityManager.createQuery("select hcs from HibernateConstructionSite hcs", HibernateConstructionSite.class).getResultList();
 
     }
 
     @Override
     public HibernateConstructionSite findById(Long id) {
-        return null;
+
+        return entityManager.find(HibernateConstructionSite.class, id);
     }
 
     @Override
     public void delete(Long id) {
-
+        entityManager.remove(findById(id));
     }
 
     @Override
+    @Transactional
     public HibernateConstructionSite save(HibernateConstructionSite entity) {
-        return null;
+
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        entityManager.persist(entity);
+        transaction.commit();
+        return entityManager.find(HibernateConstructionSite.class, entity.getId());
     }
 
     @Override
     public HibernateConstructionSite update(HibernateConstructionSite entity) {
+        return null;
+    }
+
+    @Override
+    public List<HibernateConstructionSite> findSiteByCustomer(String customerName) {
         return null;
     }
 }

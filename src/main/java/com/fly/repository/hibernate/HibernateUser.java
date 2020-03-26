@@ -1,6 +1,9 @@
 package com.fly.repository.hibernate;
 
-import lombok.*;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.sql.Date;
@@ -38,6 +41,5 @@ public class HibernateUser {
 
     @Column(name = "date_of_dissmiss")
     private Date dateOfDismiss;
-
 
 }

@@ -21,7 +21,7 @@ public class UserController {
 
     @GetMapping("/all")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseEntity<List<HibernateUser>> getUsersHibernate() {
+    public ResponseEntity<List<HibernateUser>> getUserList() {
         return new ResponseEntity<>(hibernateUser.findAll(), HttpStatus.OK);
     }
 
