@@ -1,29 +1,46 @@
-//package com.fly.repository.entities;
-//
-//import lombok.*;
-//import org.apache.commons.lang3.builder.ToStringBuilder;
-//import org.apache.commons.lang3.builder.ToStringStyle;
-//
-//import javax.persistence.*;
-//import java.sql.Date;
-//import java.util.Objects;
-//
-//
-//@NoArgsConstructor
-//@AllArgsConstructor
-//@Getter
-//@Setter
-//@Builder
-//@EqualsAndHashCode
-//public class Order {
-//
-//    private Long id;
-//    private Long userId;
-//    private Long constructionSiteId;
-//    private Date dateTaken;
-//
-//    @Override
-//    public String toString () {
-//        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
-//    }
-//}
+package com.fly.repository.entities;
+
+
+import lombok.*;
+
+
+import javax.persistence.*;
+import java.sql.Date;
+import java.util.*;
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
+@Setter
+@Builder
+@EqualsAndHashCode(exclude = {"id", "user_id", "construction_site_id", ""})
+@Entity
+@Table(name = "m_order")
+public class Order {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "construction_site_id")
+    private ConstructionSite constructionSite;
+
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @JoinTable(name = "m_order_equipment",
+            joinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
+    private Set<Equipment> orderEquipment;
+
+
+
+    @Column(name = "date_taken")
+    private Date dateTaken;
+
+
+}

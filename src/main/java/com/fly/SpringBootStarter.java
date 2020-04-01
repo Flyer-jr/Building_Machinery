@@ -47,19 +47,6 @@ public class SpringBootStarter extends SpringBootServletInitializer {
         SpringApplication.run(SpringBootStarter.class, args);
     }
 
-    @Autowired
-    @Bean(name = "sessionFactory")
-    public SessionFactory getSessionFactory(DataSource basicDataSource) throws Exception {
-        LocalSessionFactoryBean localSessionFactoryBean = new LocalSessionFactoryBean();
-        localSessionFactoryBean.setPackagesToScan("com.fly");
-        localSessionFactoryBean.setDataSource(basicDataSource);
-        localSessionFactoryBean.setHibernateProperties(getAdditionalProperties());
-        localSessionFactoryBean.afterPropertiesSet();
-        SessionFactory sessionFactory = localSessionFactoryBean.getObject();
-        return sessionFactory;
-
-    }
-
     @Bean(name = "entityManagerFactory")
     public LocalContainerEntityManagerFactoryBean entityManagerFactoryBean(DataSource basicDataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
@@ -72,14 +59,7 @@ public class SpringBootStarter extends SpringBootServletInitializer {
         return entityManagerFactoryBean;
     }
 
-    @Bean(name = "entityManager")
-    public EntityManager getEntityManager(EntityManagerFactory entityManagerFactory) {
-        return entityManagerFactory.createEntityManager();
-
-    }
-
-
-    private Properties getAdditionalProperties() {
+   private Properties getAdditionalProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", "true");
         properties.put("hibernate.archive.autodetection", "class, hbm");

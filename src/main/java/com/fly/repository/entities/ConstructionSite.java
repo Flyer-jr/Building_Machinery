@@ -1,32 +1,47 @@
 package com.fly.repository.entities;
 
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-import lombok.*;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
-
+import javax.persistence.*;
 import java.sql.Date;
-import java.util.Objects;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Getter
 @Setter
-@Builder
-@EqualsAndHashCode
+@Entity
+@Table(name = "m_construction_site")
 public class ConstructionSite {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "full_name")
     private String fullName;
+
+    @Column(name = "short_name")
     private String shortName;
-    private Long customerId;
-    private Long responsibleId;
-    private Long contractorId;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "responsible_id")
+    private User responsible;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "contractor_id")
+    private Contractor contractor;
+
+
+    @Column(name = "date_of_start")
     private Date dateOfStart;
+
+
+    @Column(name = "date_of_finish")
     private Date dateOfFinish;
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
-    }
 }

@@ -1,28 +1,33 @@
 package com.fly.repository.entities;
 
-import lombok.*;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
-import java.util.Objects;
+import javax.persistence.*;
 
-
-@NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
+@EqualsAndHashCode
 @Getter
 @Setter
-@Builder
-@EqualsAndHashCode
+@Entity
+@Table(name = "m_customers")
 public class Customer {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
+
+    @Column(name = "company_name")
     private String companyName;
-    private String adress;
+
+    @Column(name = "adress")
+    private String address;
+
+    @Column(name = "manager")
     private String managerName;
+
+    @Column(name = "phone_number")
     private String phoneNumber;
-
-
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
-    }
 }

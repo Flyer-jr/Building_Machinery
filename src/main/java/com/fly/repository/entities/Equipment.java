@@ -1,27 +1,35 @@
 package com.fly.repository.entities;
 
 import lombok.*;
-import org.apache.commons.lang3.builder.ToStringBuilder;
-import org.apache.commons.lang3.builder.ToStringStyle;
 
-import java.util.Objects;
+import javax.persistence.*;
 
-
-@NoArgsConstructor
+@Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
 @Setter
-@Builder
-@EqualsAndHashCode
+@Entity
+@Table(name = "m_equipment")
 public class Equipment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private Long id;
-    private Long storeNumber;
-    private String model;
-    private boolean isTaken;
-    private Long producerId;
 
-    @Override
-    public String toString() {
-        return ToStringBuilder.reflectionToString(this, ToStringStyle.SIMPLE_STYLE);
-    }
+    @Column(name = "store_number")
+    private Long storeNumber;
+
+    @Column(name = "model")
+    private String model;
+
+    @Column(name = "is_taken")
+    private boolean isTaken;
+
+    @ManyToOne(cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "producer_id")
+    private EquipmentProducer producer;
+
+
 }
