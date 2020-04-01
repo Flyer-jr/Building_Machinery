@@ -1,4 +1,4 @@
-package com.fly.controller.convert;
+package com.fly.controller.convertor;
 
 import org.springframework.core.convert.converter.Converter;
 

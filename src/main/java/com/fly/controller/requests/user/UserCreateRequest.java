@@ -1,4 +1,4 @@
-package com.fly.controller.requests;
+package com.fly.controller.requests.user;
 
 import lombok.*;
 
@@ -6,7 +6,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-import java.sql.Date;
 
 @Setter
 @Getter

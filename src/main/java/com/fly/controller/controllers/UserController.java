@@ -1,6 +1,6 @@
 package com.fly.controller.controllers;
 
-import com.fly.controller.requests.UserCreateRequest;
+import com.fly.controller.requests.user.UserCreateRequest;
 import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.UserRepository;
 import com.fly.repository.entities.User;

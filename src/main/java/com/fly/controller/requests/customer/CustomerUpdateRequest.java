@@ -1,4 +1,4 @@
-package com.fly.controller.requests;
+package com.fly.controller.requests.customer;
 
 import lombok.*;
 
@@ -8,6 +8,6 @@ import lombok.*;
 @ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserUpdateRequest extends UserCreateRequest {
-    private Long userId;
+public class CustomerUpdateRequest extends CustomerCreateRequest {
+  private Long customerId;
 }

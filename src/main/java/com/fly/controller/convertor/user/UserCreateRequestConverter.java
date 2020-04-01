@@ -1,6 +1,6 @@
-package com.fly.controller.convert;
+package com.fly.controller.convertor.user;
 
-import com.fly.controller.requests.UserCreateRequest;
+import com.fly.controller.requests.user.UserCreateRequest;
 import com.fly.repository.entities.User;
 import org.springframework.stereotype.Component;
 

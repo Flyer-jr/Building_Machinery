@@ -28,18 +28,21 @@ public class OrderController {
     return new ResponseEntity<>(orderRepository.findAll(), HttpStatus.OK);
   }
 
-    @ApiOperation(value = "Get user from server by id")
-    @ApiResponses({
-            @ApiResponse(code = 200, message = "Successful getting order"),
-            @ApiResponse(code = 400, message = "Invalid Order ID supplied"),
-            @ApiResponse(code = 401, message = "Lol kek"),
-            @ApiResponse(code = 404, message = "Order was not found"),
-            @ApiResponse(code = 500, message = "Server error, something wrong")
-    })
-
+  @ApiOperation(value = "Get user from server by id")
+  @ApiResponses({
+    @ApiResponse(code = 200, message = "Successful getting order"),
+    @ApiResponse(code = 400, message = "Invalid Order ID supplied"),
+    @ApiResponse(code = 401, message = "Lol kek"),
+    @ApiResponse(code = 404, message = "Order was not found"),
+    @ApiResponse(code = 500, message = "Server error, something wrong")
+  })
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
   private ResponseEntity<Order> getOrderById(@ApiParam("Order Id") @PathVariable String id) {
-        Order order = orderRepository.findById(Long.valueOf(id)).orElseThrow(() -> new EntityNotFoundException(Order.class, id));
-        return new ResponseEntity<>(order, HttpStatus.OK);}
+    Order order =
+        orderRepository
+            .findById(Long.valueOf(id))
+            .orElseThrow(() -> new EntityNotFoundException(Order.class, id));
+    return new ResponseEntity<>(order, HttpStatus.OK);
+  }
 }
