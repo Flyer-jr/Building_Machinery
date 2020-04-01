@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-@Repository
+
 public class CustomerDAOimpl implements CustomerDAO {
 
     public static final String CUSTOMER_ID = "id";

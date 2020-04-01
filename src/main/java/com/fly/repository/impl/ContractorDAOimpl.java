@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-@Repository
+
 public class ContractorDAOimpl implements ContractorDAO {
 
     public static final String CONTRACTOR_ID = "id";

@@ -2,7 +2,8 @@ package com.fly;
 
 import com.fly.configuration.core.DataBaseConfiguration;
 import com.fly.configuration.core.JdbsTemplateConfiguration;
-//import com.fly.configuration.swagger.SwaggerConfiguration;
+
+import com.fly.configuration.swagger.SwaggerConfiguration;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -20,6 +21,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 //import springfox.documentation.swagger2.annotations.EnableSwagger2;
+import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -27,7 +29,7 @@ import javax.sql.DataSource;
 import java.util.Properties;
 
 
-//@EnableSwagger2
+@EnableSwagger2WebMvc
 @EnableTransactionManagement(proxyTargetClass = true)
 @SpringBootApplication(scanBasePackages = {"com.fly"},
         exclude = {
@@ -37,7 +39,7 @@ import java.util.Properties;
 @Import({
         DataBaseConfiguration.class,
         JdbsTemplateConfiguration.class,
-//        SwaggerConfiguration.class
+        SwaggerConfiguration.class
 })
 
 public class SpringBootStarter extends SpringBootServletInitializer {
@@ -70,6 +72,7 @@ public class SpringBootStarter extends SpringBootServletInitializer {
         return entityManagerFactoryBean;
     }
 
+    @Bean(name = "entityManager")
     public EntityManager getEntityManager(EntityManagerFactory entityManagerFactory) {
         return entityManagerFactory.createEntityManager();
 
@@ -79,7 +82,7 @@ public class SpringBootStarter extends SpringBootServletInitializer {
     private Properties getAdditionalProperties() {
         Properties properties = new Properties();
         properties.put("hibernate.show_sql", "true");
-        properties.put("hibernate.archive.autodetection", "class, htm");
+        properties.put("hibernate.archive.autodetection", "class, hbm");
         properties.put("current_session_context_class", "org.springframework.orm.hibernate5.SpringSessionContext");
         return properties;
     }

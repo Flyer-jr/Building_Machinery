@@ -8,7 +8,7 @@ import org.apache.commons.lang3.builder.ToStringStyle;
 import java.sql.Date;
 import java.util.Objects;
 
-@Data
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter

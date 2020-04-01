@@ -2,19 +2,20 @@ package com.fly.repository.hibernate;
 
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.*;
+
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
-@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
+@Builder
 @EqualsAndHashCode(exclude = {"id", "user_id", "construction_site_id", ""})
 @Entity
 @Table(name = "m_order")
@@ -32,12 +33,11 @@ public class HibernateOrder {
     @JoinColumn(name = "construction_site_id")
     private HibernateConstructionSite constructionSite;
 
-    @JsonBackReference
     @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     @JoinTable(name = "m_order_equipment",
-            joinColumns = @JoinColumn(name = "order_id"),
-            inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-    private List<HibernateEquipment> orderEquipment = new ArrayList<>();
+            joinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
+    private Set<HibernateEquipment> orderEquipment;
 
 
 

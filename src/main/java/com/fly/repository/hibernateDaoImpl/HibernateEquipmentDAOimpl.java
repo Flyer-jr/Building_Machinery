@@ -1,6 +1,7 @@
 package com.fly.repository.hibernateDaoImpl;
 
 import com.fly.repository.hibernate.HibernateEquipment;
+import com.fly.repository.hibernate.HibernateOrder;
 import com.fly.repository.hibernateDAO.HibernateEquipmentDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +25,7 @@ public class HibernateEquipmentDAOimpl implements HibernateEquipmentDAO {
 
     @Override
     public List<HibernateEquipment> findAll() {
-        return null;
+        return entityManager.createQuery("select he from HibernateEquipment he", HibernateEquipment.class).getResultList();
     }
 
     @Override

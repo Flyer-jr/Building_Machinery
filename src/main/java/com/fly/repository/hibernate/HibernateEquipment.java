@@ -1,15 +1,18 @@
 package com.fly.repository.hibernate;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
-@RequiredArgsConstructor
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
 @Getter
 @Setter
 @Entity
@@ -33,7 +36,5 @@ public class HibernateEquipment {
     @JoinColumn(name = "producer_id")
     private HibernateEquipmentProducer producer;
 
-//    @JsonBackReference
-//    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "order_id")
-//    private List<HibernateOrder> equipmentOrder = new ArrayList<>();
+
 }

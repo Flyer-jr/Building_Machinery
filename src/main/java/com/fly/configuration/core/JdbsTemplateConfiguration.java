@@ -20,7 +20,7 @@ public class JdbsTemplateConfiguration {
     @Bean("namedJdbcTemplate")
     public NamedParameterJdbcTemplate getNamedJdbcTemplate() {return new NamedParameterJdbcTemplate(basicDataSource);}
 
-    @Bean("txManager")
+    @Bean("transactionManager")
     public DataSourceTransactionManager getTransactionManager() { return  new DataSourceTransactionManager(basicDataSource);}
 
 

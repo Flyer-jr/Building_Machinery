@@ -16,7 +16,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-@Repository
+
 public class ConstructionSiteDAOimpl implements ConstructionSiteDAO {
 
     public static final String CONSTRUCTION_SITE_ID = "id";

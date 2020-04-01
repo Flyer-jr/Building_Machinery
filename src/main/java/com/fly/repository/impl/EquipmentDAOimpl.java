@@ -15,7 +15,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Objects;
 
-@Repository
+
 public class EquipmentDAOimpl implements EquipmentDAO {
 
     public static String EQUIPMENT_ID = "id";

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 
 @Configuration
-@ComponentScan("com.fly")
 @PropertySource("classpath:dataBaseConfiguration.properties")
 public class DataBaseConfiguration {
     @Autowired
