@@ -8,6 +8,9 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+import org.springframework.orm.jpa.JpaTransactionManager;
+
+import javax.persistence.EntityManagerFactory;
 
 @Configuration
 @ComponentScan("com.fly")
@@ -21,7 +24,7 @@ public class JdbsTemplateConfiguration {
     public NamedParameterJdbcTemplate getNamedJdbcTemplate() {return new NamedParameterJdbcTemplate(basicDataSource);}
 
     @Bean("transactionManager")
-    public DataSourceTransactionManager getTransactionManager() { return  new DataSourceTransactionManager(basicDataSource);}
-
+    public JpaTransactionManager getTransactionManager(EntityManagerFactory entityManagerFactory) {
+        return new JpaTransactionManager(entityManagerFactory);}
 
 }

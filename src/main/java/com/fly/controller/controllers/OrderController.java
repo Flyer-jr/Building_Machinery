@@ -30,10 +30,10 @@ public class OrderController {
 
     @ApiOperation(value = "Get user from server by id")
     @ApiResponses({
-            @ApiResponse(code = 200, message = "Successful getting user"),
-            @ApiResponse(code = 400, message = "Invalid User ID supplied"),
+            @ApiResponse(code = 200, message = "Successful getting order"),
+            @ApiResponse(code = 400, message = "Invalid Order ID supplied"),
             @ApiResponse(code = 401, message = "Lol kek"),
-            @ApiResponse(code = 404, message = "User was not found"),
+            @ApiResponse(code = 404, message = "Order was not found"),
             @ApiResponse(code = 500, message = "Server error, something wrong")
     })
 

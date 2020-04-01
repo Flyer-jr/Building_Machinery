@@ -32,7 +32,7 @@ public class UserController {
   private final UserRepository userRepository;
 
   @Autowired
-  @Qualifier(value = "defaultConversionService")
+  @Qualifier(value = "mvcConversionService")
   private ConversionService conversionService;
 
   @GetMapping("/all")
@@ -60,8 +60,17 @@ public class UserController {
 
   @PostMapping
   @Transactional
+  @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<User> createUser(@RequestBody @Valid UserCreateRequest request) {
     User convertedUser = conversionService.convert(request, User.class);
     return new ResponseEntity<>(userRepository.saveAndFlush(convertedUser), CREATED);
+  }
+
+  @DeleteMapping(value = "delete/{id}")
+  @Transactional
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<Long> deleteUserById (@ApiParam("User Path Id")  @PathVariable("id") Long id){
+    userRepository.deleteById(id);
+    return new ResponseEntity<>(id, HttpStatus.OK);
   }
 }

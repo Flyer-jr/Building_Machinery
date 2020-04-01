@@ -11,14 +11,15 @@ import java.sql.Date;
 @RequiredArgsConstructor
 @Getter
 @Setter
-@EqualsAndHashCode(exclude = {"id", "password", "post", "isActual", "dateOfDismiss"})
+@EqualsAndHashCode
 @Entity
 @Table(name = "m_user")
 public class User {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @SequenceGenerator(name = "userIdSeq", sequenceName = "m_user_id_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "userIdSeq")
     private Long id;
 
     @Column(name = "first_name")

@@ -4,6 +4,7 @@ import com.fly.configuration.core.DataBaseConfiguration;
 import com.fly.configuration.core.JdbsTemplateConfiguration;
 
 import com.fly.configuration.swagger.SwaggerConfiguration;
+import com.fly.configuration.web.WebConfig;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -15,6 +16,7 @@ import org.springframework.boot.autoconfigure.orm.jpa.HibernateJpaAutoConfigurat
 import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -30,6 +32,7 @@ import java.util.Properties;
 
 
 @EnableSwagger2WebMvc
+@EnableJpaRepositories
 @EnableTransactionManagement(proxyTargetClass = true)
 @SpringBootApplication(scanBasePackages = {"com.fly"},
         exclude = {
@@ -37,6 +40,7 @@ import java.util.Properties;
                 HibernateJpaAutoConfiguration.class
         })
 @Import({
+        WebConfig.class,
         DataBaseConfiguration.class,
         JdbsTemplateConfiguration.class,
         SwaggerConfiguration.class

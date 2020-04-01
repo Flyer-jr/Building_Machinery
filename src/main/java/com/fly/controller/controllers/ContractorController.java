@@ -5,10 +5,7 @@ import com.fly.repository.entities.Contractor;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class ContractorController {
 
   private final ContractorRepository contractorRepository;
 
-  @RequestMapping("/all")
+  @GetMapping("/all")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<List<Contractor>> getContractorList() {
     return new ResponseEntity<>(contractorRepository.findAll(), HttpStatus.OK);
