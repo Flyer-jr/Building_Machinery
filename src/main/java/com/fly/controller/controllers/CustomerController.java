@@ -62,7 +62,7 @@ public class CustomerController {
   @Transactional
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<Customer> createCustomer(
-      @RequestBody @Valid CustomerCreateRequest request) {
+      @ModelAttribute @Valid CustomerCreateRequest request) {
     Customer convertedCustomer = conversionService.convert(request, Customer.class);
     return new ResponseEntity<>(customerRepository.saveAndFlush(convertedCustomer), CREATED);
   }

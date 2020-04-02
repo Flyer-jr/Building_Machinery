@@ -63,7 +63,7 @@ public class ContractorController {
   @Transactional
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<Contractor> createContractor(
-      @RequestBody @Valid ContractorCreateRequest request) {
+      @ModelAttribute @Valid ContractorCreateRequest request) {
     Contractor convertedContractor = conversionService.convert(request, Contractor.class);
     return new ResponseEntity<>(contractorRepository.saveAndFlush(convertedContractor), CREATED);
   }

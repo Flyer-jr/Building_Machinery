@@ -28,7 +28,7 @@ public class OrderController {
     return new ResponseEntity<>(orderRepository.findAll(), HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Get user from server by id")
+  @ApiOperation(value = "Get order from server by id")
   @ApiResponses({
     @ApiResponse(code = 200, message = "Successful getting order"),
     @ApiResponse(code = 400, message = "Invalid Order ID supplied"),
