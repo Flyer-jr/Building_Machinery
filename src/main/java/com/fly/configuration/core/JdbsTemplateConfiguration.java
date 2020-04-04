@@ -16,15 +16,17 @@ import javax.persistence.EntityManagerFactory;
 @ComponentScan("com.fly")
 public class JdbsTemplateConfiguration {
 
-    @Autowired
-    @Qualifier("basicDataSource")
-    private BasicDataSource basicDataSource;
+  @Autowired
+  @Qualifier("dataSource")
+  private BasicDataSource basicDataSource;
 
-    @Bean("namedJdbcTemplate")
-    public NamedParameterJdbcTemplate getNamedJdbcTemplate() {return new NamedParameterJdbcTemplate(basicDataSource);}
+  @Bean("namedJdbcTemplate")
+  public NamedParameterJdbcTemplate getNamedJdbcTemplate() {
+    return new NamedParameterJdbcTemplate(basicDataSource);
+  }
 
-    @Bean("transactionManager")
-    public JpaTransactionManager getTransactionManager(EntityManagerFactory entityManagerFactory) {
-        return new JpaTransactionManager(entityManagerFactory);}
-
+  @Bean("transactionManager")
+  public JpaTransactionManager getTransactionManager(EntityManagerFactory entityManagerFactory) {
+    return new JpaTransactionManager(entityManagerFactory);
+  }
 }

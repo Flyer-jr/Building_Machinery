@@ -38,13 +38,10 @@ public class UserController {
 
   @ApiOperation(value = "Get all users from server")
   @ApiResponses({
-          @ApiResponse(code = 200, message = "Successful getting data"),
-          @ApiResponse(code = 400, message = "Something wrong"),
-          @ApiResponse(code = 401, message = "Forbidden"),
-          @ApiResponse(code = 404, message = "Users not found"),
-          @ApiResponse(code = 500, message = "Server error, something wrong")
+    @ApiResponse(code = 200, message = "Successful getting data"),
+    @ApiResponse(code = 404, message = "Users not found"),
+    @ApiResponse(code = 500, message = "Server error, something wrong")
   })
-
   @GetMapping("/all")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<List<User>> getUserList() {
@@ -70,13 +67,11 @@ public class UserController {
 
   @ApiOperation(value = "Create user")
   @ApiResponses({
-          @ApiResponse(code = 200, message = "Successful creating"),
-          @ApiResponse(code = 400, message = "Invalid User properties supplied"),
-          @ApiResponse(code = 401, message = "Forbidden"),
-          @ApiResponse(code = 404, message = "Something wrong"),
-          @ApiResponse(code = 500, message = "Server error, something wrong")
+    @ApiResponse(code = 200, message = "Successful creating"),
+    @ApiResponse(code = 400, message = "Invalid User properties supplied"),
+    @ApiResponse(code = 401, message = "Forbidden"),
+    @ApiResponse(code = 500, message = "Server error, something wrong")
   })
-
   @PostMapping
   @Transactional
   @ResponseStatus(HttpStatus.OK)
@@ -87,17 +82,16 @@ public class UserController {
 
   @ApiOperation(value = "Delete user from server by id")
   @ApiResponses({
-          @ApiResponse(code = 200, message = "Successful deleting user"),
-          @ApiResponse(code = 400, message = "Invalid User ID supplied"),
-          @ApiResponse(code = 401, message = "Forbidden"),
-          @ApiResponse(code = 404, message = "User was not found"),
-          @ApiResponse(code = 500, message = "Server error, something wrong")
+    @ApiResponse(code = 200, message = "Successful deleting user"),
+    @ApiResponse(code = 400, message = "Invalid User ID supplied"),
+    @ApiResponse(code = 404, message = "User was not found"),
+    @ApiResponse(code = 500, message = "Server error, something wrong")
   })
-
   @DeleteMapping(value = "delete/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<Long> deleteUserById (@ApiParam("User Path Id")  @PathVariable("id") Long id){
+  public ResponseEntity<Long> deleteUserById(
+      @ApiParam("User Path Id") @PathVariable("id") Long id) {
     userRepository.deleteById(id);
     return new ResponseEntity<>(id, HttpStatus.OK);
   }
@@ -105,7 +99,7 @@ public class UserController {
   @PostMapping("update/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<Long> updateUserById (@ModelAttribute @Valid UserUpdateRequest request) {
+  public ResponseEntity<Long> updateUserById(@ModelAttribute @Valid UserUpdateRequest request) {
     User convertedUser = conversionService.convert(request, User.class);
     return new ResponseEntity(userRepository.save(convertedUser), HttpStatus.OK);
   }
