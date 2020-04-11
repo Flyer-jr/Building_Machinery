@@ -1,13 +1,20 @@
 package com.fly.repository.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fly.util.EntityIdResolver;
 import lombok.*;
 
 import javax.persistence.*;
 
 @RequiredArgsConstructor
-@Getter
-@Setter
+@Data
 @Entity
+@JsonIdentityInfo(
+        property = "id",
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        scope = EquipmentProducer.class,
+        resolver = EntityIdResolver.class)
 @Table(name = "m_equipment_producers")
 public class EquipmentProducer {
     @Id

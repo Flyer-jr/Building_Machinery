@@ -1,7 +1,6 @@
 package com.fly.controller.controllers;
 
-import com.fly.controller.requests.user.UserCreateRequest;
-import com.fly.servise.MailSender;
+import com.fly.service.MailSender;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;

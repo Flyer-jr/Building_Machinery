@@ -1,6 +1,5 @@
-package com.fly.servise;
+package com.fly.service;
 
-import com.sun.xml.messaging.saaj.packaging.mime.MessagingException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;

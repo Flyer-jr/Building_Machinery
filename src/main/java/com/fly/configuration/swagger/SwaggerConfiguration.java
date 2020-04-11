@@ -1,14 +1,16 @@
 package com.fly.configuration.swagger;
 
 import com.fasterxml.classmate.TypeResolver;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-//import springfox.bean.validators.configuration.BeanValidatorPluginsConfiguration;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.context.request.async.DeferredResult;
+import springfox.documentation.RequestHandler;
 import springfox.documentation.builders.*;
 import springfox.documentation.schema.ModelRef;
 import springfox.documentation.schema.WildcardType;

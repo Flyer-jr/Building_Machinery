@@ -1,18 +1,28 @@
 package com.fly.repository.entities;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fly.util.EntityIdResolver;
 import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
 @Getter
 @Setter
 @Entity
+@JsonIdentityInfo(
+        property = "id",
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        scope = Equipment.class,
+        resolver = EntityIdResolver.class)
 @Table(name = "m_equipment")
 public class Equipment {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -29,6 +39,7 @@ public class Equipment {
 
     @ManyToOne(cascade = CascadeType.REMOVE)
     @JoinColumn(name = "producer_id")
+    @JsonIdentityReference(alwaysAsId = true)
     private EquipmentProducer producer;
 
 

@@ -1,46 +1,47 @@
 package com.fly.repository.entities;
 
-
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import lombok.*;
 
-
 import javax.persistence.*;
-import java.sql.Date;
+import java.util.Date;
+import java.time.LocalDate;
 import java.util.*;
 
-@Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 @EqualsAndHashCode(exclude = {"id", "user_id", "construction_site_id", ""})
 @Entity
 @Table(name = "m_order")
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "user_id")
-    private User user;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "user_id")
+  @JsonIdentityReference(alwaysAsId = true)
+  private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "construction_site_id")
-    private ConstructionSite constructionSite;
+  @ManyToOne(fetch = FetchType.EAGER)
+  @JoinColumn(name = "construction_site_id")
+  @JsonIdentityReference(alwaysAsId = true)
+  private ConstructionSite constructionSite;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(name = "m_order_equipment",
-            joinColumns = @JoinColumn(name = "equipment_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"))
-    private Set<Equipment> orderEquipment;
+  @Column(name = "date_taken")
+  @Temporal(TemporalType.DATE)
+  private Date dateTaken;
 
+  @Column(name = "active")
+  private boolean active;
 
-
-    @Column(name = "date_taken")
-    private Date dateTaken;
-
-
+  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @JoinTable(
+      name = "m_order_equipment",
+      joinColumns = @JoinColumn(name = "order_id"),
+      inverseJoinColumns = @JoinColumn(name = "equipment_id"))
+  private Set<Equipment> equipment = new HashSet<>();
 }

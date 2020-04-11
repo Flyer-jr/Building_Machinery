@@ -41,13 +41,6 @@ public class CustomerController {
   }
 
   @ApiOperation(value = "Get customer from server by id")
-  @ApiResponses({
-    @ApiResponse(code = 200, message = "Successful getting data"),
-    @ApiResponse(code = 400, message = "Invalid ID"),
-    @ApiResponse(code = 401, message = "Forbidden"),
-    @ApiResponse(code = 404, message = "Entity was not found"),
-    @ApiResponse(code = 500, message = "Server error, something wrong")
-  })
   @GetMapping(value = "/{id}")
   public ResponseEntity<Customer> getCustomerById(
       @ApiParam("Customer Id") @PathVariable String id) {
@@ -70,9 +63,9 @@ public class CustomerController {
   @DeleteMapping(value = "delete/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<Long> deleteCustomerById(
-      @ApiParam("Customer Id") @PathVariable("id") Long id) {
-    customerRepository.deleteById(id);
+  public ResponseEntity<String> deleteCustomerById(
+      @ApiParam("Customer Id") @PathVariable("id") String id) {
+    customerRepository.deleteById(Long.valueOf(id));
     return new ResponseEntity<>(id, HttpStatus.OK);
   }
 }

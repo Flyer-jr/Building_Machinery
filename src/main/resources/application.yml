@@ -11,4 +11,8 @@ mailconfig:
   mailPassword: zgwdvidgkzzsjzts
   host: smtp.gmail.com
   port: 587
+---
+token:
+  sshSecret: topsecret
+  expirationTime: 172000000
 

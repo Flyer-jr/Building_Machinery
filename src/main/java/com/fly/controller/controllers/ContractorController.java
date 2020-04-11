@@ -71,9 +71,9 @@ public class ContractorController {
   @DeleteMapping(value = "delete/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<Long> deleteContractorById(
-      @ApiParam("Contractor Id") @PathVariable("id") Long id) {
-    contractorRepository.deleteById(id);
+  public ResponseEntity<String> deleteContractorById(
+      @ApiParam("Contractor Id") @PathVariable("id") String id) {
+    contractorRepository.deleteById(Long.valueOf(id));
     return new ResponseEntity<>(id, HttpStatus.OK);
   }
 }
