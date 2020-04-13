@@ -5,14 +5,15 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.time.LocalDate;
+
 import java.util.*;
 
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@Builder
-@EqualsAndHashCode(exclude = {"id", "user_id", "construction_site_id", ""})
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 @Table(name = "m_order")
 public class Order {
@@ -38,10 +39,10 @@ public class Order {
   @Column(name = "active")
   private boolean active;
 
-  @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+  @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
       name = "m_order_equipment",
       joinColumns = @JoinColumn(name = "order_id"),
       inverseJoinColumns = @JoinColumn(name = "equipment_id"))
-  private Set<Equipment> equipment = new HashSet<>();
+  private Set<Equipment> equipment = Collections.emptySet();
 }

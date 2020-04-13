@@ -45,20 +45,20 @@ public class UserController {
 
   @ApiOperation(value = "Get user from server by name")
   @GetMapping(value = "/search/{name}")
-  public ResponseEntity<List<User>> getUserByName(@PathVariable  String name) {
-   return new ResponseEntity<>(userRepository.findUsersByFirstName(name), HttpStatus.OK);
+  public ResponseEntity<List<User>> getUserByName(@PathVariable String name) {
+    return new ResponseEntity<>(userRepository.findUsersByFirstName(name), HttpStatus.OK);
   }
-
 
   @ApiOperation(value = "Get user from server by id")
   @GetMapping(value = "/{id}")
   public ResponseEntity<User> getUserById(@ApiParam("User Path Id") @PathVariable String id) {
     User user =
-            userRepository
-                    .findById(Long.valueOf(id))
-                    .orElseThrow(() -> new EntityNotFoundException(User.class, id));
+        userRepository
+            .findById(Long.valueOf(id))
+            .orElseThrow(() -> new EntityNotFoundException(User.class, id));
     return new ResponseEntity<>(user, HttpStatus.OK);
   }
+
   @ApiOperation(value = "Create user")
   @PostMapping
   @Transactional

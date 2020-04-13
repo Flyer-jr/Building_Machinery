@@ -1,4 +1,4 @@
-package com.fly.controller.requests.customer;
+package com.fly.controller.requests.constructionSite;
 
 import lombok.*;
 
@@ -6,6 +6,7 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Setter
 @Getter
@@ -13,30 +14,31 @@ import javax.validation.constraints.Size;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class CustomerCreateRequest {
-
-  @NotNull
-  @NotEmpty
-  @Size(min = 3, max = 100)
-  private String companyName;
-
-  @NotNull
-  @NotEmpty
-  @Size(min = 3, max = 20)
-  private String shortName;
-
-  @NotNull
-  @NotEmpty
-  @Size(min = 3, max = 50)
-  private String managerName;
-
-  @NotNull
-  @NotEmpty
-  @Pattern(regexp = "^[+]\\d{12}$")
-  private String phoneNumber;
+public class ConstructionSiteCreateRequest {
 
   @NotNull
   @NotEmpty
   @Size(min = 3, max = 200)
-  private String address;
+  private String fullName;
+
+  @NotNull
+  @NotEmpty
+  @Size(min = 3, max = 50)
+  private String shortName;
+
+  @NotNull
+  @NotEmpty
+  private String customerShortName;
+
+  @NotNull
+  @NotEmpty
+  private String userName;
+
+  @NotNull
+  @NotEmpty
+  private String contractorShortName;
+
+  private Date dateOfStart;
+
+  private Date dateOfFinish;
 }

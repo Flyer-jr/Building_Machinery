@@ -9,7 +9,7 @@ public abstract class ContractorRequestConverter<S, T> extends EntityConverter<S
   protected Contractor doConvert(Contractor contractor, ContractorCreateRequest request) {
 
     contractor.setFullName(request.getFullName());
-    contractor.setShortName(request.getShortName());
+    contractor.setShortName(request.getShortName().toLowerCase());
     contractor.setAddress(request.getAddress());
 
     return contractor;

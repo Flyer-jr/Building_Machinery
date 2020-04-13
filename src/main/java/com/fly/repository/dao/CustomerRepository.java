@@ -10,7 +10,6 @@ import java.util.List;
 @Repository
 public interface CustomerRepository
     extends JpaRepository<Customer, Long>, CrudRepository<Customer, Long> {
-  List<Customer> findCustomerByManagerName(String manager);
 
-  Customer findCustomerByCompanyName(String companyName);
+  Customer findCustomerByShortName(String companyName);
 }

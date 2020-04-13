@@ -11,22 +11,20 @@ import javax.persistence.*;
 @Data
 @Entity
 @JsonIdentityInfo(
-        property = "id",
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        scope = EquipmentProducer.class,
-        resolver = EntityIdResolver.class)
+    property = "id",
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    scope = EquipmentProducer.class,
+    resolver = EntityIdResolver.class)
 @Table(name = "m_equipment_producers")
 public class EquipmentProducer {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "id")
+  private Long id;
 
-    @Column(name = "name")
-    private String name;
+  @Column(name = "name")
+  private String name;
 
-    @Column(name = "post_adress")
-    private String postAddress;
-
-
+  @Column(name = "post_adress")
+  private String postAddress;
 }

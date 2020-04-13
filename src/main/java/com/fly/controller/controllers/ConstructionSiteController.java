@@ -2,6 +2,8 @@ package com.fly.controller.controllers;
 
 import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.ConstructionSiteRepository;
+import com.fly.repository.dto.EntityListDTO;
+import com.fly.repository.dto.ListEquipmentDTO;
 import com.fly.repository.entities.ConstructionSite;
 import com.fly.repository.entities.User;
 import io.swagger.annotations.ApiOperation;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -29,14 +32,15 @@ public class ConstructionSiteController {
     return new ResponseEntity<>(constructionSiteRepository.findAll(), HttpStatus.OK);
   }
 
+  @GetMapping("/allAsList")
+  @ResponseStatus(HttpStatus.OK)
+  public List<EntityListDTO> list() {
+    return constructionSiteRepository.findAll().stream()
+        .map(entity -> new EntityListDTO(entity.getId(), entity.getShortName()))
+        .collect(Collectors.toList());
+  }
+
   @ApiOperation(value = "Get Construction Site from server by id")
-  @ApiResponses({
-    @ApiResponse(code = 200, message = "Successful getting data"),
-    @ApiResponse(code = 400, message = "Invalid ID"),
-    @ApiResponse(code = 401, message = "Forbidden"),
-    @ApiResponse(code = 404, message = "Entity not found"),
-    @ApiResponse(code = 500, message = "Server error, something wrong")
-  })
   @GetMapping(value = "/{id}")
   public ResponseEntity<ConstructionSite> getSiteById(
       @ApiParam("Construction Site Id") @PathVariable String id) {

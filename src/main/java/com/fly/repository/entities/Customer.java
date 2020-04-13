@@ -26,6 +26,9 @@ public class Customer {
     @Column(name = "company_name")
     private String companyName;
 
+    @Column(name = "short_name")
+    private String shortName;
+
     @Column(name = "adress")
     private String address;
 

@@ -1,7 +1,10 @@
 package com.fly.repository.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fly.util.EntityIdResolver;
 import lombok.*;
 import net.minidev.json.annotate.JsonIgnore;
 
@@ -12,6 +15,11 @@ import java.util.*;
 @RequiredArgsConstructor
 @Data
 @EqualsAndHashCode
+@JsonIdentityInfo(
+        property = "id",
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        scope = ConstructionSite.class,
+        resolver = EntityIdResolver.class)
 @Entity
 @Table(name = "m_user")
 public class User {
@@ -45,6 +53,7 @@ public class User {
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "role")
+  @JsonIgnore
   private Role role;
 
 //  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)

@@ -18,7 +18,7 @@ public abstract class UserRequestConverter<S, T> extends EntityConverter<S, T> {
     protected User doConvert(User user, UserCreateRequest request) {
 
         user.setFirstName(request.getFirstName());
-        user.setSecondName(request.getSecondName());
+        user.setSecondName(request.getSecondName().toLowerCase());
         user.setPost(request.getPost());
         user.setActual(Boolean.TRUE);
         user.setRole(DEFAULT_ROLE);

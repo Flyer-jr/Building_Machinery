@@ -5,7 +5,6 @@ import lombok.*;
 import javax.annotation.Generated;
 import javax.persistence.*;
 
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -15,12 +14,11 @@ import javax.persistence.*;
 @Table(name = "m_roles")
 public class Role {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "role_id")
-    private Long roleId;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  @Column(name = "role_id")
+  private Long roleId;
 
-    @Column(name = "role_name")
-    private String roleName;
-
+  @Column(name = "role_name")
+  private String roleName;
 }

@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface EquipmentRepository
     extends JpaRepository<Equipment, Long>, CrudRepository<Equipment, Long> {
-  Equipment findEquipmentByStoreNumber(Long storeNumber);
+
+  Equipment findEquipmentByStoreNumber(String storeNumber);
 }

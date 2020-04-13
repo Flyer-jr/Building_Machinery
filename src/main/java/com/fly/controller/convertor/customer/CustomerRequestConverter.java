@@ -9,6 +9,7 @@ public abstract class CustomerRequestConverter<S, T> extends EntityConverter<S, 
   protected Customer doConvert(Customer customer, CustomerCreateRequest request) {
 
     customer.setCompanyName(request.getCompanyName());
+    customer.setShortName(request.getShortName().toLowerCase());
     customer.setManagerName(request.getManagerName());
     customer.setPhoneNumber(request.getPhoneNumber());
     customer.setAddress(request.getAddress());

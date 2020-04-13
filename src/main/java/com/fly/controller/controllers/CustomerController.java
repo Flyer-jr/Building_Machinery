@@ -3,6 +3,7 @@ package com.fly.controller.controllers;
 import com.fly.controller.requests.customer.CustomerCreateRequest;
 import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.CustomerRepository;
+import com.fly.repository.dto.EntityListDTO;
 import com.fly.repository.entities.Customer;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -38,6 +40,14 @@ public class CustomerController {
   public ResponseEntity<List<Customer>> getCustomerList() {
 
     return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
+  }
+
+  @GetMapping("/allAsList")
+  @ResponseStatus(HttpStatus.OK)
+  public List<EntityListDTO> list() {
+    return customerRepository.findAll().stream()
+        .map(entity -> new EntityListDTO(entity.getId(), entity.getShortName()))
+        .collect(Collectors.toList());
   }
 
   @ApiOperation(value = "Get customer from server by id")

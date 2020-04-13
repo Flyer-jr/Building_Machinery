@@ -5,8 +5,7 @@ import lombok.Data;
 
 @Data
 @AllArgsConstructor
-public class ListEquipmentDTO {
+public class EntityListDTO {
   private Long id;
-  private String storeNumber;
   private String value;
 }
