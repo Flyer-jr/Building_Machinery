@@ -45,8 +45,8 @@ public class UserController {
 
   @ApiOperation(value = "Get user from server by name")
   @GetMapping(value = "/search/{name}")
-  public ResponseEntity<List<User>> getUserByName(@PathVariable String name) {
-    return new ResponseEntity<>(userRepository.findUsersByFirstName(name), HttpStatus.OK);
+  public ResponseEntity<User> getUserByName(@PathVariable String name) {
+    return new ResponseEntity<>(userRepository.findUserBySecondName(name.toLowerCase()), HttpStatus.OK);
   }
 
   @ApiOperation(value = "Get user from server by id")
@@ -78,6 +78,7 @@ public class UserController {
     return new ResponseEntity<>(id, HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Update user at server by id")
   @PostMapping("update/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)

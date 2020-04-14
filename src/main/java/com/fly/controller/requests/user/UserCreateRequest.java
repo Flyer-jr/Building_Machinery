@@ -17,10 +17,10 @@ public class UserCreateRequest {
 
   @NotNull
   @NotEmpty
-  @Size(min = 3, max = 20)
   private String firstName;
 
-  @Pattern(regexp = "\\w+")
+  @NotNull
+  @NotEmpty
   private String secondName;
 
   @NotNull
@@ -31,10 +31,13 @@ public class UserCreateRequest {
   @NotNull
   @NotEmpty
   @Size(min = 6, max = 20)
+  private String login;
+
+  @NotNull
+  @NotEmpty
   private String password;
 
   @NotNull
   @NotEmpty
-  @Pattern(regexp = "\\w+")
   private String post;
 }

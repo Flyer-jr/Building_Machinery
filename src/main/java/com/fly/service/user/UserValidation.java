@@ -12,8 +12,7 @@ public class UserValidation {
     private final UserRepository userRepository;
 
     public boolean userValid(String userName) {
-        if (userRepository.findUserByFirstName(userName) != null ||
-                userRepository.findUserBySecondName(userName) != null) return Boolean.TRUE;
+        if (userRepository.findUserBySecondName(userName.toLowerCase()) != null) return Boolean.TRUE;
         else {
             throw new UsernameNotFoundException(
                 String.format("No user found with field '%s'.", userName));

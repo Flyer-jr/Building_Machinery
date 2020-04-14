@@ -1,14 +1,13 @@
 package com.fly.controller.controllers;
 
 import com.fly.controller.requests.customer.CustomerCreateRequest;
+import com.fly.controller.requests.customer.CustomerUpdateRequest;
 import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.CustomerRepository;
 import com.fly.repository.dto.EntityListDTO;
 import com.fly.repository.entities.Customer;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,7 +16,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -36,12 +34,14 @@ public class CustomerController {
   @Qualifier(value = "mvcConversionService")
   private ConversionService conversionService;
 
+  @ApiOperation(value = "Get all Customers from server")
   @GetMapping("/all")
   public ResponseEntity<List<Customer>> getCustomerList() {
 
     return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Get all Customers from server as list using DTO for frontend checkboxes")
   @GetMapping("/allAsList")
   @ResponseStatus(HttpStatus.OK)
   public List<EntityListDTO> list() {
@@ -61,6 +61,7 @@ public class CustomerController {
     return new ResponseEntity<>(customer, HttpStatus.OK);
   }
 
+  @ApiOperation(value = "Save new customer to server")
   @PostMapping
   @Transactional
   @ResponseStatus(HttpStatus.OK)
@@ -70,6 +71,17 @@ public class CustomerController {
     return new ResponseEntity<>(customerRepository.saveAndFlush(convertedCustomer), CREATED);
   }
 
+  @ApiOperation(value = "Update customer at server")
+  @PutMapping
+  @Transactional
+  @ResponseStatus(HttpStatus.OK)
+  public ResponseEntity<Customer> updateCustomer(
+      @ModelAttribute @Valid CustomerUpdateRequest request) {
+    Customer convertedCustomer = conversionService.convert(request, Customer.class);
+    return new ResponseEntity<>(customerRepository.saveAndFlush(convertedCustomer), HttpStatus.OK);
+  }
+
+  @ApiOperation(value = "Delete customer from server by id")
   @DeleteMapping(value = "delete/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)

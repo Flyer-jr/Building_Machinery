@@ -3,10 +3,8 @@ package com.fly.controller.controllers;
 import com.fly.controller.requests.order.OrderCreateRequest;
 import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.OrderRepository;
-import com.fly.repository.dto.EntityListDTO;
 import com.fly.repository.entities.Order;
 import com.fly.service.order.OrderCreationService;
-import com.fly.service.order.OrderValidationService;
 import io.swagger.annotations.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -28,14 +25,14 @@ import static org.springframework.http.HttpStatus.CREATED;
 public class OrderController {
 
   private final OrderRepository orderRepository;
-
   private final OrderCreationService creationService;
-  private final OrderValidationService validationService;
+
 
   @Autowired
   @Qualifier(value = "mvcConversionService")
   private ConversionService conversionService;
 
+  @ApiOperation(value = "Get all orders from server")
   @GetMapping("/all")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<List<Order>> getAllOrders() {
@@ -53,7 +50,7 @@ public class OrderController {
     return new ResponseEntity<>(order, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Create order")
+  @ApiOperation(value = "Create new order")
   @PostMapping
   @Transactional
   @ResponseBody
@@ -71,7 +68,7 @@ public class OrderController {
   @DeleteMapping(value = "delete/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<String> deleteUserById(
+  public ResponseEntity<String> deleteOrderById(
       @ApiParam("User Path Id") @PathVariable("id") String id) {
     orderRepository.deleteById(Long.valueOf(id));
     return new ResponseEntity<>(id, HttpStatus.OK);

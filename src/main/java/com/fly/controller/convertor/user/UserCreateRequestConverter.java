@@ -19,7 +19,7 @@ public class UserCreateRequestConverter extends UserRequestConverter<UserCreateR
   @Override
   public User convert(UserCreateRequest request) {
     User user = new User();
-    user.setPhoneNumber(request.getPhoneNumber());
+    user.setLogin(request.getLogin());
     user.setPassword(passwordEncoder.encode(request.getPassword()));
     return doConvert(user, request);
   }

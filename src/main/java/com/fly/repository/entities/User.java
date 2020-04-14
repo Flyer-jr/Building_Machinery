@@ -16,10 +16,10 @@ import java.util.*;
 @Data
 @EqualsAndHashCode
 @JsonIdentityInfo(
-        property = "id",
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        scope = ConstructionSite.class,
-        resolver = EntityIdResolver.class)
+    property = "id",
+    generator = ObjectIdGenerators.PropertyGenerator.class,
+    scope = ConstructionSite.class,
+    resolver = EntityIdResolver.class)
 @Entity
 @Table(name = "m_user")
 public class User {
@@ -40,6 +40,9 @@ public class User {
   private String phoneNumber;
 
   @Column
+  private String login;
+
+  @Column
   private String password;
 
   @Column
@@ -55,8 +58,4 @@ public class User {
   @JoinColumn(name = "role")
   @JsonIgnore
   private Role role;
-
-//  @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, orphanRemoval = true)
-//  @JsonBackReference
-//  private List<Order> userOrders = new ArrayList<>();
 }
