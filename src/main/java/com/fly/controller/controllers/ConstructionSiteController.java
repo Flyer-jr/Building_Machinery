@@ -6,6 +6,8 @@ import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.ConstructionSiteRepository;
 import com.fly.repository.dto.EntityListDTO;
 import com.fly.repository.entities.ConstructionSite;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
@@ -35,6 +37,8 @@ public class ConstructionSiteController {
   private ConversionService conversionService;
 
   @ApiOperation(value = "Get all Construction Sites from server")
+  @ApiImplicitParams(
+          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @GetMapping("/all")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<List<ConstructionSite>> getSiteList() {
@@ -42,6 +46,8 @@ public class ConstructionSiteController {
   }
 
   @ApiOperation(value = "Get all Construction Site from server using DTO for checkboxes")
+  @ApiImplicitParams(
+          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @GetMapping("/allAsList")
   @ResponseStatus(HttpStatus.OK)
   public List<EntityListDTO> list() {
@@ -52,6 +58,8 @@ public class ConstructionSiteController {
   }
 
   @ApiOperation(value = "Get Construction Site from server by id")
+  @ApiImplicitParams(
+          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @GetMapping(value = "/{id}")
   public ResponseEntity<ConstructionSite> getSiteById(
       @ApiParam("Construction Site Id") @PathVariable String id) {
@@ -63,6 +71,8 @@ public class ConstructionSiteController {
   }
 
   @ApiOperation(value = "Save new Construction Site to server")
+  @ApiImplicitParams(
+          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @PostMapping
   @Transactional
   @ResponseStatus(HttpStatus.OK)
@@ -73,6 +83,8 @@ public class ConstructionSiteController {
   }
 
   @ApiOperation(value = "Update Construction Site at server")
+  @ApiImplicitParams(
+          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @PutMapping
   @Transactional
   @ResponseStatus(HttpStatus.OK)
@@ -84,6 +96,8 @@ public class ConstructionSiteController {
   }
 
   @ApiOperation(value = "Delete ConstructionSite from server by id")
+  @ApiImplicitParams(
+          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @DeleteMapping(value = "delete/{id}")
   @Transactional
   @ResponseStatus(HttpStatus.OK)

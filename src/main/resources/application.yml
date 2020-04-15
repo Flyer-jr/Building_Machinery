@@ -13,6 +13,6 @@ mailconfig:
   port: 587
 ---
 token:
-  sshSecret: topsecret
-  expirationTime: 172000000
+  sshSecret: ThetopSecretforthetopsecret
+  expirationTime: 720000000
 

@@ -19,10 +19,10 @@ import java.io.Serializable;
 public class AuthenticationRequest implements Serializable {
 
     @NotEmpty
-    @ApiModelProperty(required = true, allowableValues = "+375293047729", dataType = "string", notes = "user phone number for login")
-    private String phoneNumber;
+    @ApiModelProperty(required = true, dataType = "string", notes = "user login")
+    private String login;
 
     @NotEmpty
-    @ApiModelProperty(required = true, allowableValues = "+375293047729", dataType = "string", notes = "user password for login")
+    @ApiModelProperty(required = true, dataType = "string", notes = "user password")
     private String password;
 }

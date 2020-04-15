@@ -1,4 +1,4 @@
-package com.fly.configuration.web;
+package com.fly.configuration.web.email;
 
 import lombok.Getter;
 import lombok.Setter;

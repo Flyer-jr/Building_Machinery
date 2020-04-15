@@ -6,6 +6,8 @@ import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.CustomerRepository;
 import com.fly.repository.dto.EntityListDTO;
 import com.fly.repository.entities.Customer;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
@@ -41,7 +44,10 @@ public class CustomerController {
     return new ResponseEntity<>(customerRepository.findAll(), HttpStatus.OK);
   }
 
+  @Secured("ROLE_ADMIN")
   @ApiOperation(value = "Get all Customers from server as list using DTO for frontend checkboxes")
+  @ApiImplicitParams(
+          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @GetMapping("/allAsList")
   @ResponseStatus(HttpStatus.OK)
   public List<EntityListDTO> list() {
