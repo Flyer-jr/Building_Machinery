@@ -1,6 +1,5 @@
 package com.fly.controller.controllers;
 
-import com.fly.controller.requests.constructionSite.ConstructionSiteCreateRequest;
 import com.fly.controller.requests.constructionSite.ConstructionSiteUpdateRequest;
 import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.ConstructionSiteRepository;
@@ -16,13 +15,21 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.core.convert.ConversionService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import static org.springframework.http.HttpStatus.CREATED;
 
 @CrossOrigin
 @RestController
@@ -38,7 +45,13 @@ public class ConstructionSiteController {
 
   @ApiOperation(value = "Get all Construction Sites from server")
   @ApiImplicitParams(
-          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
+          @ApiImplicitParam(
+                  name = "Auth-Token",
+                  value = "Auth-Token",
+                  required = true,
+                  dataType = "String",
+                  paramType = "Header"))
+  @Secured({"ROLE_ADMIN", "ROLE_USER"})
   @GetMapping("/all")
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<List<ConstructionSite>> getSiteList() {
@@ -48,6 +61,7 @@ public class ConstructionSiteController {
   @ApiOperation(value = "Get all Construction Site from server using DTO for checkboxes")
   @ApiImplicitParams(
           @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
+  @Secured({"ROLE_ADMIN", "ROLE_USER"})
   @GetMapping("/allAsList")
   @ResponseStatus(HttpStatus.OK)
   public List<EntityListDTO> list() {
@@ -60,6 +74,7 @@ public class ConstructionSiteController {
   @ApiOperation(value = "Get Construction Site from server by id")
   @ApiImplicitParams(
           @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
+  @Secured({"ROLE_ADMIN", "ROLE_USER"})
   @GetMapping(value = "/{id}")
   public ResponseEntity<ConstructionSite> getSiteById(
       @ApiParam("Construction Site Id") @PathVariable String id) {
@@ -70,24 +85,13 @@ public class ConstructionSiteController {
     return new ResponseEntity<>(constructionSite, HttpStatus.OK);
   }
 
-  @ApiOperation(value = "Save new Construction Site to server")
-  @ApiImplicitParams(
-          @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
-  @PostMapping
-  @Transactional
-  @ResponseStatus(HttpStatus.OK)
-  public ResponseEntity<ConstructionSite> createConstructionSite(
-      @ModelAttribute @Valid ConstructionSiteCreateRequest request) {
-    ConstructionSite convertedSite = conversionService.convert(request, ConstructionSite.class);
-    return new ResponseEntity<>(constructionSiteRepository.saveAndFlush(convertedSite), CREATED);
-  }
-
   @ApiOperation(value = "Update Construction Site at server")
   @ApiImplicitParams(
           @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @PutMapping
-  @Transactional
+  @Transactional(rollbackOn = Exception.class)
   @ResponseStatus(HttpStatus.OK)
+  @Secured({"ROLE_ADMIN", "ROLE_USER"})
   public ResponseEntity<ConstructionSite> updateSite(
       @ModelAttribute @Valid ConstructionSiteUpdateRequest request) {
     ConstructionSite convertedSite = conversionService.convert(request, ConstructionSite.class);
@@ -99,7 +103,8 @@ public class ConstructionSiteController {
   @ApiImplicitParams(
           @ApiImplicitParam(name = "Auth-Token", value = "Auth-Token", required = true, dataType = "String", paramType = "Header"))
   @DeleteMapping(value = "delete/{id}")
-  @Transactional
+  @Secured("ROLE_ADMIN")
+  @Transactional(rollbackOn = Exception.class)
   @ResponseStatus(HttpStatus.OK)
   public ResponseEntity<String> deleteConstructionSiteById(
       @ApiParam("Construction Site Id") @PathVariable("id") String id) {

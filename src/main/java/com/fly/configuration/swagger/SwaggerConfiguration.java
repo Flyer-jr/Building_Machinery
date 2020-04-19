@@ -1,33 +1,30 @@
 package com.fly.configuration.swagger;
 
 import com.fasterxml.classmate.TypeResolver;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.context.request.async.DeferredResult;
-import springfox.documentation.RequestHandler;
-import springfox.documentation.builders.*;
-import springfox.documentation.schema.ModelRef;
-import springfox.documentation.schema.WildcardType;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.builders.PathSelectors;
+import springfox.documentation.builders.RequestHandlerSelectors;
 import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
-import springfox.documentation.service.Tag;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.data.rest.configuration.SpringDataRestConfiguration;
 import springfox.documentation.spring.web.plugins.Docket;
-//import springfox.documentation.swagger2.annotations.EnableSwagger2;
-import springfox.documentation.swagger.web.*;
+import springfox.documentation.swagger.web.DocExpansion;
+import springfox.documentation.swagger.web.ModelRendering;
+import springfox.documentation.swagger.web.OperationsSorter;
+import springfox.documentation.swagger.web.TagsSorter;
+import springfox.documentation.swagger.web.UiConfiguration;
+import springfox.documentation.swagger.web.UiConfigurationBuilder;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 
-import static java.util.Collections.singletonList;
-import static springfox.documentation.schema.AlternateTypeRules.newRule;
+//import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @Configuration
 @EnableSwagger2WebMvc
@@ -40,23 +37,11 @@ public class SwaggerConfiguration {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.fly.controller"))
+                .apis(RequestHandlerSelectors.basePackage("com.fly.controller.controllers"))
                 .paths(PathSelectors.any())
                 .build()
-                .pathMapping("/")
-                .directModelSubstitute(LocalDate.class, String.class)
-                .genericModelSubstitutes(ResponseEntity.class)
-                .alternateTypeRules(
-                        newRule(typeResolver.resolve(DeferredResult.class,
-                                typeResolver.resolve(ResponseEntity.class, WildcardType.class)),
-                                typeResolver.resolve(WildcardType.class)))
-                .useDefaultResponseMessages(false)
-                .globalResponseMessage(RequestMethod.GET,
-                        singletonList(new ResponseMessageBuilder()
-                                .code(500)
-                                .message("500 message")
-                                .responseModel(new ModelRef("Error"))
-                                .build()));
+                .apiInfo(apiEndPointsInfo())
+                .directModelSubstitute(Timestamp.class, Long.class);
 
 
 
@@ -80,6 +65,11 @@ public class SwaggerConfiguration {
                 .supportedSubmitMethods(UiConfiguration.Constants.DEFAULT_SUBMIT_METHODS)
                 .validatorUrl(null)
                 .build();
+    }
+
+    private ApiInfo generateApiInfo() {
+        return new ApiInfo("demo", "demo.", "Version 1.0", "urn:tos", ApiInfo.DEFAULT_CONTACT, "Apache 2.0",
+                "http://www.apache.org/licenses/LICENSE-2.0", new ArrayList<>());
     }
 
     private ApiInfo apiEndPointsInfo() {

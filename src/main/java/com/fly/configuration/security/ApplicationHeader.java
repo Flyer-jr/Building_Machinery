@@ -2,5 +2,5 @@ package com.fly.configuration.security;
 
 public interface ApplicationHeader {
 
-     String TOKEN = "auth-token";
+  String TOKEN = "auth-token";
 }

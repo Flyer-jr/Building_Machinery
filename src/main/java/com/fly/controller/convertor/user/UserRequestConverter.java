@@ -20,6 +20,7 @@ public abstract class UserRequestConverter<S, T> extends EntityConverter<S, T> {
         user.setFirstName(request.getFirstName());
         user.setSecondName(request.getSecondName().toLowerCase());
         user.setPhoneNumber(request.getPhoneNumber());
+        user.setEmail(request.getEmail().toLowerCase());
         user.setPost(request.getPost());
         user.setActual(Boolean.TRUE);
         user.setRole(DEFAULT_ROLE);

@@ -1,16 +1,15 @@
 package com.fly.configuration.core;
 
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
-
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
-import org.springframework.context.annotation.*;
-import org.springframework.core.env.Environment;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
+import org.springframework.context.annotation.Scope;
 
 import java.util.Objects;
 
@@ -19,6 +18,7 @@ import java.util.Objects;
 @ConfigurationProperties("datasource")
 @Getter
 @Setter
+@Slf4j
 public class DataBaseConfiguration {
 
   private String driverName;
@@ -46,4 +46,5 @@ public class DataBaseConfiguration {
     dataSource.setMaxIdle(Integer.valueOf(Objects.requireNonNull(maxActive)));
     return dataSource;
   }
+
 }

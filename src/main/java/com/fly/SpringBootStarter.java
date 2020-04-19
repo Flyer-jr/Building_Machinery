@@ -18,6 +18,7 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
+
 import javax.sql.DataSource;
 import java.util.Properties;
 
@@ -54,12 +55,19 @@ public class SpringBootStarter extends SpringBootServletInitializer {
 
   private Properties getAdditionalProperties() {
     Properties properties = new Properties();
+    properties.put("hibernate.dialect", "org.hibernate.dialect.PostgreSQL95Dialect");
+    properties.put("hibernate.hbm2ddl.auto", "update");
     properties.put("hibernate.show_sql", "true");
     properties.put("hibernate.archive.autodetection", "class, hbm");
     properties.put(
-        "current_session_context_class", "org.springframework.orm.hibernate5.SpringSessionContext");
+            "current_session_context_class", "org.springframework.orm.hibernate5.SpringSessionContext");
     return properties;
   }
+
+
+
+
+
 
 
 }

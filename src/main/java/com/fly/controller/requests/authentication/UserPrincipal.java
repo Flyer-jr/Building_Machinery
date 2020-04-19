@@ -3,7 +3,11 @@ package com.fly.controller.requests.authentication;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fly.repository.entities.User;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -24,13 +28,10 @@ public class UserPrincipal implements UserDetails {
 
     private String username;
 
-
     @JsonIgnore
     private String password;
 
     private Collection<? extends GrantedAuthority> authorities;
-
-
 
     public static UserPrincipal create(User user) {
         List<GrantedAuthority> authorities = new LinkedList<>();

@@ -8,8 +8,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+
 import java.util.Objects;
-import java.util.PrimitiveIterator;
 import java.util.Properties;
 
 @Configuration
@@ -26,6 +26,8 @@ public class MailConfig {
   private String mailAddress;
 
   private String mailPassword;
+
+  private String localServer;
 
   @Bean
   public JavaMailSender javaMailSender() {

@@ -7,13 +7,12 @@ import com.fly.exceptions.EntityNotFoundException;
 import com.fly.repository.dao.ConstructionSiteRepository;
 import com.fly.repository.dao.EquipmentRepository;
 import com.fly.repository.dao.UserRepository;
-import com.fly.repository.entities.Equipment;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
-import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -23,29 +22,30 @@ public class OrderValidationService {
   private final ConstructionSiteRepository siteRepository;
   private final EquipmentRepository equipmentRepository;
 
+  @Transactional(rollbackFor = Exception.class)
   public ValidOrderCreateRequest createValid(OrderCreateRequest request) {
 
     ValidOrderCreateRequest validRequest = new ValidOrderCreateRequest();
 
     try {
       validRequest.setUser(
-          userRepository.findUserBySecondName(request.getUserName().toLowerCase()));
+              userRepository.findUserBySecondName(request.getUserName().toLowerCase()));
     } catch (Exception e) {
       throw new EntityNotFoundException(
-          String.format("No User found with name '%s'.", request.getUserName()));
+              String.format("No User found with name '%s'.", request.getUserName()));
     }
     try {
       validRequest.setConstructionSite(
-          siteRepository.findSiteByShortName(request.getConstructionSiteShortName().toLowerCase()));
+              siteRepository.findSiteByShortName(request.getConstructionSiteShortName().toLowerCase()));
     } catch (Exception e) {
       throw new EntityNotFoundException(
-          String.format(
-              "No Construction Site found with name '%s'.",
-              request.getConstructionSiteShortName()));
+              String.format(
+                      "No Construction Site found with name '%s'.",
+                      request.getConstructionSiteShortName()));
     }
     try {
       validRequest.setEquipment(
-          new HashSet<>(equipmentRepository.findAllById(request.getEquipment())));
+              new HashSet<>(equipmentRepository.findAllById(request.getEquipment())));
     } catch (Exception e) {
       throw new EntityNotFoundException(String.format("Some of Equipment not found with name "));
     }

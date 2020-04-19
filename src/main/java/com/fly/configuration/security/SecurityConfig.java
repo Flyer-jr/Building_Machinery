@@ -25,8 +25,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
         securedEnabled = true,
-        jsr250Enabled = true,
-        prePostEnabled = true
+        jsr250Enabled = true
+
 )
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -75,23 +75,25 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             "/swagger-resources/**",
             "/configuration/security/**",
             "/swagger-ui.html",
-            "/webjars/**")
-        .permitAll()
-        .antMatchers("/actuator/**")
-        .permitAll()
-        .antMatchers(HttpMethod.GET, "/swagger-ui.html#")
-        .permitAll()
-        .antMatchers(HttpMethod.OPTIONS, "/**")
-        .permitAll()
-        .antMatchers("/auth/**")
-        .permitAll()
-        .antMatchers("/admin/**")
-        .hasRole("ADMIN")
-        .anyRequest()
-        .authenticated();
+                "/webjars/**")
+                .permitAll()
+                .antMatchers("/actuator/**")
+                .permitAll()
+                .antMatchers(HttpMethod.GET, "/swagger-ui.html#")
+                .permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**")
+                .permitAll()
+                .antMatchers("/auth/**")
+                .permitAll()
+                .antMatchers("/confirmation**")
+                .permitAll()
+                .antMatchers("/admin/**")
+                .hasRole("ADMIN")
+                .anyRequest()
+                .authenticated();
 
-        // Add our custom JWT security filter
-        http.addFilterAfter(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+        http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
 
 
     }

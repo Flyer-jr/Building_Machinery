@@ -5,12 +5,18 @@ import com.fasterxml.jackson.annotation.JsonIdentityReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fly.util.EntityIdResolver;
 import lombok.Data;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-import javax.persistence.*;
-import java.sql.Date;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import java.sql.Timestamp;
 
 @RequiredArgsConstructor
 @Data
@@ -49,8 +55,8 @@ public class ConstructionSite {
   private Contractor contractor;
 
   @Column(name = "date_of_start")
-  private Date dateOfStart;
+  private Timestamp dateOfStart;
 
   @Column(name = "date_of_finish")
-  private Date dateOfFinish;
+  private Timestamp dateOfFinish;
 }

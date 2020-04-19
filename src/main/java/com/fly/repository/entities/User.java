@@ -1,25 +1,34 @@
 package com.fly.repository.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fly.util.EntityIdResolver;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.RequiredArgsConstructor;
 import net.minidev.json.annotate.JsonIgnore;
 
-import javax.persistence.*;
-import java.sql.Date;
-import java.util.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import java.sql.Timestamp;
+
 
 @RequiredArgsConstructor
 @Data
 @EqualsAndHashCode
 @JsonIdentityInfo(
-    property = "id",
-    generator = ObjectIdGenerators.PropertyGenerator.class,
-    scope = ConstructionSite.class,
-    resolver = EntityIdResolver.class)
+        property = "id",
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        scope = ConstructionSite.class,
+        resolver = EntityIdResolver.class)
 @Entity
 @Table(name = "m_user")
 public class User {
@@ -45,6 +54,8 @@ public class User {
   @Column
   private String password;
 
+  private String email;
+
   @Column
   private String post;
 
@@ -52,7 +63,7 @@ public class User {
   private boolean isActual;
 
   @Column(name = "date_of_dissmiss")
-  private Date dateOfDismiss;
+  private Timestamp dateOfDismiss;
 
   @OneToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "role")
