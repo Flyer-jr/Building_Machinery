@@ -1,20 +1,20 @@
-INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dissmiss, role,
+INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dismiss, role,
                            login, email)
 VALUES (4, 'Дмитрий', 'николенко', '+375296335142', '+375296335142', 'Главный Инженер', false, '2016-09-27', 2, 'dimon',
         'dimasik@gmail.com');
-INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dissmiss, role,
+INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dismiss, role,
                            login, email)
 VALUES (1, 'Алексей', 'летун', '+375293047729', '$2y$08$JLniibofdY71hJqeVoa/p.VZXfxjf0PKtHGfwxPsD7mWXRhEIeoXS',
         'Главный Инженер', true, null, 1, 'flyer', 'alexflyer.jr@gmail.com');
-INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dissmiss, role,
+INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dismiss, role,
                            login, email)
 VALUES (3, 'Александр', 'третьяк', '+375293935878', '+375293935878', 'Прораб', true, null, 2, 'sid',
         'tretyaksancho@tut.by');
-INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dissmiss, role,
+INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dismiss, role,
                            login, email)
 VALUES (2, 'Юрий', 'медведев', '+375296221161', '+375296221161', 'Директор', true, null, 1, 'medvedev',
         'yurimedvedev@gmail.com');
-INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dissmiss, role,
+INSERT INTO public.m_user (id, first_name, second_name, phone_number, password, post, actual, date_of_dismiss, role,
                            login, email)
 VALUES (5, 'Денис', 'чехлинков', '+375293772906', '+375293772906', 'Главный Инженер', false, '2015-04-24', 1, 'den',
         'denchik@mail.by');
@@ -24,79 +24,79 @@ VALUES (1, 'ROLE_ADMIN');
 INSERT INTO public.m_roles (role_id, role_name)
 VALUES (2, 'ROLE_USER');
 
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (6, 'ситик', 'Citic Construction LLC', '32nd Floor, CITIC Tower 1 Tim Mei Avenue Central, Hong Kong');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (1, 'гарант', 'ООО Гарант качества', 'Минск, ул. Тимирязева 121
 ');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (2, 'литана', 'Litana LLC', 'Минск, ул. Машиностроителей 29
 ');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (3, 'юнионгаз', 'ООО ЮнионГаз', 'Минск, ул. Одоевского 115А');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (4, 'магнус', 'Magnus Group LLC', 'Минск, пр-т Притыцкого 156');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (5, 'замок', 'ОДО Высокий Замок', 'Минск, ул. Домбровская 29');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (7, 'си-трейдинг', 'ООО Си-Трейдинг', 'Минск, ул. Лопатина 5');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (8, 'бпплюс', 'ООО БытСтройРемонт', 'Минск, Тимирязева 54');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (9, 'никма', 'ООО НикМаСтройСервис', 'Минск, ул. Казинца 64А');
-INSERT INTO public.m_contractor (id, short_name, full_name, adress)
+INSERT INTO public.m_contractor (id, short_name, full_name, address)
 VALUES (10, 'ослябя', 'ООО Ослябя', 'Минск, ул. Краснозвездная 18
 ');
 
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (1, 'ОДО Табак-Инвест', 'Минск, ул. Гусовского 22', 'Худяков Андрей', '+375296780837', 'табак');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (2, 'ООО БелДжи', 'Борисовский р-н, Р-54, 35 км', 'Chen Bin', '+375294688779', 'белджи');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (3, 'ООО ОМА', 'Минск, пер. Промышленный 12А', 'Теркин Василий', '+375447090949', 'ома');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (4, 'ООО БелПромСтрой', 'Минск, ул. Липковская 9', 'Дедюля Дмитрий', '+375291237951', 'белпромстрой');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (5, 'ИООО Сокол', 'Минск, пр-т Победителей 25', 'Ахмад ибн Шахид', '+375333221100', 'сокол');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (6, 'ООО ВладПродИмпорт', 'Заславль, ул. Загородная 5', 'Вадим Анатольевич', '+375296332516', 'владпродимпорт');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (7, 'ЗАО Рекомбел',
         'Минская обл., Смолевичский р-н, Смолевичский с/с, Китайско-Белорусский индустриальный парк "Великий камень"',
         'Дедушкин Владимир', '+375295519515', 'рекомбел');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (8, 'ООО БизнесПатронатПлюс', 'Минск, ул. Машиностроителей 29', 'Сапраньков Владимир Анатольевич',
         '+375296331578', 'бизнеспатронатплюс');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (9, 'ООО А-100 Девелоплмент', 'п. Боровая, ул. Леонардо да Винчи 5', 'Алешкин Алексей Алексеевич',
         '+375447445566', 'а-100');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (10, 'ИООО Дана Холдингс', 'Минск, пр-т Независимости 128', 'Василий Васильевич Данов', '+375291251346', 'дана');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (11, 'ООО Халекс', 'п. Дроздово 15', 'Андрей Михайлович', '+375296331564', 'халекс');
-INSERT INTO public.m_customers (id, company_name, adress, manager, phone_number, short_name)
+INSERT INTO public.m_customers (id, company_name, address, manager, phone_number, short_name)
 VALUES (12, 'ООО Моторлэнд', 'д. Малиновка, ул. Центральная 16', 'Глазков Александр Петрович', '+375447461532',
         'моторлэнд');
 
-INSERT INTO public.m_equipment_producers (id, name, post_adress)
+INSERT INTO public.m_equipment_producers (id, name, post_address)
 VALUES (1, 'Whiteman', 'Multiquip Inc.
 Corporate Headquarters
 6141 Katella Ave, Suite 200
 Cypress, CA 90630');
-INSERT INTO public.m_equipment_producers (id, name, post_adress)
+INSERT INTO public.m_equipment_producers (id, name, post_address)
 VALUES (2, 'Barikell', 'Barikell Srl
 Via C. Razzaboni, 118, 41122 Modena MO');
-INSERT INTO public.m_equipment_producers (id, name, post_adress)
+INSERT INTO public.m_equipment_producers (id, name, post_address)
 VALUES (3, 'Somero', 'SOMERO ENTERPRISES INC.
 14530 Global Parkway,
 Fort Myers, FL 33913');
-INSERT INTO public.m_equipment_producers (id, name, post_adress)
+INSERT INTO public.m_equipment_producers (id, name, post_address)
 VALUES (4, 'MBW', '250 Hartford Road
 PO Box 440
 Slinger, WI 53086-0440
 Phone: 800-678-5237
 Fax: 262-644-5169');
-INSERT INTO public.m_equipment_producers (id, name, post_adress)
+INSERT INTO public.m_equipment_producers (id, name, post_address)
 VALUES (5, 'Husquarna', 'Husqvarna UK Ltd
 Preston Road
 Aycliffe Industrial Park

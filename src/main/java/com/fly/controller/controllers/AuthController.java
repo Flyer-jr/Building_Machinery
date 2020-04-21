@@ -77,6 +77,7 @@ public class AuthController {
   public ResponseEntity<AuthResponse> confirmUserAccount(@RequestParam("auth-token") String confirmationToken) {
 
     AuthenticationRequest request = registrationService.confirm(confirmationToken);
+
     return logIn(request);
   }
 

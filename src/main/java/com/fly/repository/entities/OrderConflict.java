@@ -48,7 +48,7 @@ public class OrderConflict {
         @JoinColumn(name = "target_order_id")
         private Order targetOrder;
 
-        @ManyToMany(fetch = FetchType.EAGER)
+        @ManyToMany
         @JoinTable(
                 name = "m_order_conflicts_equipment",
                 joinColumns = @JoinColumn(name = "order_conflict_id"),

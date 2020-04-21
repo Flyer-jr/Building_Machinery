@@ -1,6 +1,7 @@
 package com.fly.repository.entities;
 
 import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -18,6 +19,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import java.sql.Timestamp;
 import java.util.Collections;
@@ -56,10 +58,14 @@ public class Order {
 
   @ManyToMany(fetch = FetchType.EAGER)
   @JoinTable(
-      name = "m_order_equipment",
-      joinColumns = @JoinColumn(name = "order_id"),
-      inverseJoinColumns = @JoinColumn(name = "equipment_id"))
+          name = "m_order_equipment",
+          joinColumns = @JoinColumn(name = "order_id"),
+          inverseJoinColumns = @JoinColumn(name = "equipment_id"))
   private Set<Equipment> equipment = Collections.emptySet();
+
+  @OneToOne(mappedBy = "targetOrder")
+  @JsonManagedReference
+  private OrderConflict conflict;
 
 
 }

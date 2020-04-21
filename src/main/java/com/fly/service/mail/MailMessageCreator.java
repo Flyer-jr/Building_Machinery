@@ -40,7 +40,7 @@ public class MailMessageCreator {
   public String registrationMessageCreate(User user) {
 
     String message = "";
-    message = message.concat(REGISTRATION_TEXT).concat(user.getLogin());
+    message = message.concat(REGISTRATION_TEXT).concat(user.toString());
 
     return message;
   }
@@ -52,13 +52,15 @@ public class MailMessageCreator {
                     .concat(ORDER_TEXT)
                     .concat(
                             String.format(
-                                    "User %s %s just created new order \n"
-                                            + "it includes: \n %s \n"
-                                            + "for the site: \n %s.",
+                                    "User %s %s just created new order \n "
+                                            + " it includes: \n %s \n "
+                                            + " for the site: \n %s \n "
+                                            + " with some conflicts: %s.",
                                     user.getFirstName(),
                                     user.getSecondName(),
                                     order.getEquipment(),
-                                    order.getConstructionSite()));
+                                    order.getConstructionSite(),
+                                    order.getConflict()));
     return message;
   }
 }

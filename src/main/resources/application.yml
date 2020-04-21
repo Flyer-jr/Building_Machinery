@@ -5,12 +5,12 @@ datasource:
   password: Ca59563
   initialSize: 10
   maxActive: 7
-#spring:
-#  flyway:
-#    ignore-missing-migrations: true
-#    locations: classpath:/migrations
-#    baseline-on-migrate: true
-#    baseline-description: Flyway Scripts
+spring:
+  flyway:
+    ignore-missing-migrations: true
+    locations: classpath:/migrations
+    baseline-on-migrate: true
+    baseline-description: Flyway Scripts
 ---
 mailconfig:
   mailAddress: buildin.machinery@gmail.com

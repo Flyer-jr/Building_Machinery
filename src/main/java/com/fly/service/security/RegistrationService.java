@@ -72,10 +72,11 @@ public class RegistrationService {
       UserCreateRequest userCreateRequest = new UserCreateRequest();
       BeanUtils.copyProperties(notConfirmedUser.get(), userCreateRequest, "id", "confirmationToken");
       notConfirmedUsersRepository.delete(notConfirmedUser.get());
-      userRepository.saveAndFlush(
+      User user = userRepository.saveAndFlush(
               Objects.requireNonNull(conversionService.convert(userCreateRequest, User.class)));
       request.setLogin(notConfirmedUser.get().getLogin());
       request.setPassword(notConfirmedUser.get().getPassword());
+      mailSender.sendMail(user.getEmail(), messageCreator.registrationMessageCreate(user));
     }
     return request;
   }

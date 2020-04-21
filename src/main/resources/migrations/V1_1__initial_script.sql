@@ -97,7 +97,7 @@ create table if not exists m_construction_site
     short_name     varchar(50)  not null,
     customer_id    bigint       not null
         constraint customer
-            references m_customers,
+            references m_customer,
     responsible_id bigint       not null
         constraint responsible
             references m_user,
@@ -146,9 +146,7 @@ create table if not exists m_roles
 (
     role_id   bigint  not null
         constraint m_roles_pkey
-            primary key
-        constraint user_id
-            references m_user,
+            primary key,
     role_name varchar not null
 );
 
